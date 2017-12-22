@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>プチ電車シリーズ - The Daiso Petit Train - ザ・ダイソー</title>
+    <meta name="description" content="A site about the Daiso Petit Train Series (ザ・ダイソーのプチ電車シリーズ in Japanese)">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Analytics -->
+    <script>
+        window.ga = window.ga || function() {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', 'UA-15483804-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+</head>
+
+<body>
+    <noscript>
+        For full functionality of this site it is necessary to enable JavaScript.
+    </noscript>
+    <script src="main.js"></script>
+    <script type="text/javascript">
+        (function(_window, _document) {
+            var app = Elm.Main.fullscreen();
+            var _body = _document.body;
+            var onUrlChange = function(page) {
+                _window.requestAnimationFrame(function() {
+                    smoothTransition();
+                    app.ports.titleChanged.send(page);
+                    _document.title = page;
+                    _document.querySelector('meta[name="description"]').setAttribute("content", "Meta Description of the page " + page +
+                        ". This page is a test to check how Single Page Applications work well with Search Engines (SEO). Full article at...");
+                });
+            };
+            var smoothTransition = function() {
+                _body.classList.add("subAppHide");
+                _body.classList.remove("subAppShow");
+                setTimeout(function() {
+                    _body.classList.add("subAppShow");
+                    _body.classList.remove("subAppHide");
+                }, 100);
+            };
+            app.ports.titleChanged.send(_document.title);
+            app.ports.urlChange.subscribe(onUrlChange);
+        })(window, window.document);
+    </script>
+</body>
+
+</html>
