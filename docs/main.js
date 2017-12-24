@@ -135,27 +135,6 @@ function A9(fun, a, b, c, d, e, f, g, h, i)
     : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
 }
 
-var _elm_lang$lazy$Native_Lazy = function() {
-
-function memoize(thunk)
-{
-    var value;
-    var isForced = false;
-    return function(tuple0) {
-        if (!isForced) {
-            value = thunk(tuple0);
-            isForced = true;
-        }
-        return value;
-    };
-}
-
-return {
-    memoize: memoize
-};
-
-}();
-
 //import Native.Utils //
 
 var _elm_lang$core$Native_Basics = function() {
@@ -3189,99 +3168,6 @@ var _elm_lang$core$Platform$Task = {ctor: 'Task'};
 var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
 var _elm_lang$core$Platform$Router = {ctor: 'Router'};
 
-var _elm_lang$lazy$Lazy$force = function (_p0) {
-	var _p1 = _p0;
-	return _p1._0(
-		{ctor: '_Tuple0'});
-};
-var _elm_lang$lazy$Lazy$Lazy = function (a) {
-	return {ctor: 'Lazy', _0: a};
-};
-var _elm_lang$lazy$Lazy$lazy = function (thunk) {
-	return _elm_lang$lazy$Lazy$Lazy(
-		_elm_lang$lazy$Native_Lazy.memoize(thunk));
-};
-var _elm_lang$lazy$Lazy$map = F2(
-	function (f, a) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p2) {
-				var _p3 = _p2;
-				return f(
-					_elm_lang$lazy$Lazy$force(a));
-			});
-	});
-var _elm_lang$lazy$Lazy$map2 = F3(
-	function (f, a, b) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p4) {
-				var _p5 = _p4;
-				return A2(
-					f,
-					_elm_lang$lazy$Lazy$force(a),
-					_elm_lang$lazy$Lazy$force(b));
-			});
-	});
-var _elm_lang$lazy$Lazy$map3 = F4(
-	function (f, a, b, c) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p6) {
-				var _p7 = _p6;
-				return A3(
-					f,
-					_elm_lang$lazy$Lazy$force(a),
-					_elm_lang$lazy$Lazy$force(b),
-					_elm_lang$lazy$Lazy$force(c));
-			});
-	});
-var _elm_lang$lazy$Lazy$map4 = F5(
-	function (f, a, b, c, d) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p8) {
-				var _p9 = _p8;
-				return A4(
-					f,
-					_elm_lang$lazy$Lazy$force(a),
-					_elm_lang$lazy$Lazy$force(b),
-					_elm_lang$lazy$Lazy$force(c),
-					_elm_lang$lazy$Lazy$force(d));
-			});
-	});
-var _elm_lang$lazy$Lazy$map5 = F6(
-	function (f, a, b, c, d, e) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p10) {
-				var _p11 = _p10;
-				return A5(
-					f,
-					_elm_lang$lazy$Lazy$force(a),
-					_elm_lang$lazy$Lazy$force(b),
-					_elm_lang$lazy$Lazy$force(c),
-					_elm_lang$lazy$Lazy$force(d),
-					_elm_lang$lazy$Lazy$force(e));
-			});
-	});
-var _elm_lang$lazy$Lazy$apply = F2(
-	function (f, x) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p12) {
-				var _p13 = _p12;
-				return A2(
-					_elm_lang$lazy$Lazy$force,
-					f,
-					_elm_lang$lazy$Lazy$force(x));
-			});
-	});
-var _elm_lang$lazy$Lazy$andThen = F2(
-	function (callback, a) {
-		return _elm_lang$lazy$Lazy$lazy(
-			function (_p14) {
-				var _p15 = _p14;
-				return _elm_lang$lazy$Lazy$force(
-					callback(
-						_elm_lang$lazy$Lazy$force(a)));
-			});
-	});
-
 //import Maybe, Native.List //
 
 var _elm_lang$core$Native_Regex = function() {
@@ -3418,1477 +3304,6 @@ var _elm_lang$core$Regex$AtMost = function (a) {
 	return {ctor: 'AtMost', _0: a};
 };
 var _elm_lang$core$Regex$All = {ctor: 'All'};
-
-var _Bogdanp$elm_combine$Combine$app = function (p) {
-	var _p0 = p;
-	if (_p0.ctor === 'Parser') {
-		return _p0._0;
-	} else {
-		return _elm_lang$lazy$Lazy$force(_p0._0);
-	}
-};
-var _Bogdanp$elm_combine$Combine$InputStream = F3(
-	function (a, b, c) {
-		return {data: a, input: b, position: c};
-	});
-var _Bogdanp$elm_combine$Combine$initStream = function (s) {
-	return A3(_Bogdanp$elm_combine$Combine$InputStream, s, s, 0);
-};
-var _Bogdanp$elm_combine$Combine$runParser = F3(
-	function (p, st, s) {
-		var _p1 = A3(
-			_Bogdanp$elm_combine$Combine$app,
-			p,
-			st,
-			_Bogdanp$elm_combine$Combine$initStream(s));
-		if (_p1._2.ctor === 'Ok') {
-			return _elm_lang$core$Result$Ok(
-				{ctor: '_Tuple3', _0: _p1._0, _1: _p1._1, _2: _p1._2._0});
-		} else {
-			return _elm_lang$core$Result$Err(
-				{ctor: '_Tuple3', _0: _p1._0, _1: _p1._1, _2: _p1._2._0});
-		}
-	});
-var _Bogdanp$elm_combine$Combine$parse = function (p) {
-	return A2(
-		_Bogdanp$elm_combine$Combine$runParser,
-		p,
-		{ctor: '_Tuple0'});
-};
-var _Bogdanp$elm_combine$Combine$ParseLocation = F3(
-	function (a, b, c) {
-		return {source: a, line: b, column: c};
-	});
-var _Bogdanp$elm_combine$Combine$currentLocation = function (stream) {
-	var find = F3(
-		function (position, currentLine, lines) {
-			find:
-			while (true) {
-				var _p2 = lines;
-				if (_p2.ctor === '[]') {
-					return A3(_Bogdanp$elm_combine$Combine$ParseLocation, '', 1, position);
-				} else {
-					if (_p2._1.ctor === '[]') {
-						return A3(_Bogdanp$elm_combine$Combine$ParseLocation, _p2._0, currentLine + 1, position);
-					} else {
-						var _p3 = _p2._0;
-						var length = _elm_lang$core$String$length(_p3);
-						if (_elm_lang$core$Native_Utils.cmp(position, length) > -1) {
-							var _v3 = (position - length) - 1,
-								_v4 = currentLine + 1,
-								_v5 = _p2._1;
-							position = _v3;
-							currentLine = _v4;
-							lines = _v5;
-							continue find;
-						} else {
-							if (_elm_lang$core$Native_Utils.eq(currentLine, 0)) {
-								return A3(_Bogdanp$elm_combine$Combine$ParseLocation, _p3, 1, position);
-							} else {
-								return A3(_Bogdanp$elm_combine$Combine$ParseLocation, _p3, currentLine, position - 1);
-							}
-						}
-					}
-				}
-			}
-		});
-	var lines = A2(_elm_lang$core$String$split, '\n', stream.data);
-	return A3(find, stream.position, 0, lines);
-};
-var _Bogdanp$elm_combine$Combine$currentSourceLine = function (_p4) {
-	return function (_) {
-		return _.source;
-	}(
-		_Bogdanp$elm_combine$Combine$currentLocation(_p4));
-};
-var _Bogdanp$elm_combine$Combine$currentLine = function (_p5) {
-	return function (_) {
-		return _.line;
-	}(
-		_Bogdanp$elm_combine$Combine$currentLocation(_p5));
-};
-var _Bogdanp$elm_combine$Combine$currentColumn = function (_p6) {
-	return function (_) {
-		return _.column;
-	}(
-		_Bogdanp$elm_combine$Combine$currentLocation(_p6));
-};
-var _Bogdanp$elm_combine$Combine$RecursiveParser = function (a) {
-	return {ctor: 'RecursiveParser', _0: a};
-};
-var _Bogdanp$elm_combine$Combine$lazy = function (t) {
-	return _Bogdanp$elm_combine$Combine$RecursiveParser(
-		_elm_lang$lazy$Lazy$lazy(
-			function (_p7) {
-				var _p8 = _p7;
-				return _Bogdanp$elm_combine$Combine$app(
-					t(
-						{ctor: '_Tuple0'}));
-			}));
-};
-var _Bogdanp$elm_combine$Combine$Parser = function (a) {
-	return {ctor: 'Parser', _0: a};
-};
-var _Bogdanp$elm_combine$Combine$primitive = _Bogdanp$elm_combine$Combine$Parser;
-var _Bogdanp$elm_combine$Combine$bimap = F3(
-	function (fok, ferr, p) {
-		return _Bogdanp$elm_combine$Combine$Parser(
-			F2(
-				function (state, stream) {
-					var _p9 = A3(_Bogdanp$elm_combine$Combine$app, p, state, stream);
-					if (_p9._2.ctor === 'Ok') {
-						return {
-							ctor: '_Tuple3',
-							_0: _p9._0,
-							_1: _p9._1,
-							_2: _elm_lang$core$Result$Ok(
-								fok(_p9._2._0))
-						};
-					} else {
-						return {
-							ctor: '_Tuple3',
-							_0: _p9._0,
-							_1: _p9._1,
-							_2: _elm_lang$core$Result$Err(
-								ferr(_p9._2._0))
-						};
-					}
-				}));
-	});
-var _Bogdanp$elm_combine$Combine$map = F2(
-	function (f, p) {
-		return A3(_Bogdanp$elm_combine$Combine$bimap, f, _elm_lang$core$Basics$identity, p);
-	});
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['<$>'] = _Bogdanp$elm_combine$Combine$map;
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['<$'] = function (res) {
-	return _Bogdanp$elm_combine$Combine$map(
-		_elm_lang$core$Basics$always(res));
-};
-var _Bogdanp$elm_combine$Combine$skip = function (p) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<$'],
-		{ctor: '_Tuple0'},
-		p);
-};
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['$>'] = _elm_lang$core$Basics$flip(
-	F2(
-		function (x, y) {
-			return A2(_Bogdanp$elm_combine$Combine_ops['<$'], x, y);
-		}));
-var _Bogdanp$elm_combine$Combine$mapError = _Bogdanp$elm_combine$Combine$bimap(_elm_lang$core$Basics$identity);
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['<?>'] = F2(
-	function (p, m) {
-		return A2(
-			_Bogdanp$elm_combine$Combine$mapError,
-			_elm_lang$core$Basics$always(
-				{
-					ctor: '::',
-					_0: m,
-					_1: {ctor: '[]'}
-				}),
-			p);
-	});
-var _Bogdanp$elm_combine$Combine$withState = function (f) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return A3(
-					_Bogdanp$elm_combine$Combine$app,
-					f(state),
-					state,
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$withLocation = function (f) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return A3(
-					_Bogdanp$elm_combine$Combine$app,
-					f(
-						_Bogdanp$elm_combine$Combine$currentLocation(stream)),
-					state,
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$withLine = function (f) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return A3(
-					_Bogdanp$elm_combine$Combine$app,
-					f(
-						_Bogdanp$elm_combine$Combine$currentLine(stream)),
-					state,
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$withColumn = function (f) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return A3(
-					_Bogdanp$elm_combine$Combine$app,
-					f(
-						_Bogdanp$elm_combine$Combine$currentColumn(stream)),
-					state,
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$andThen = F2(
-	function (f, p) {
-		return _Bogdanp$elm_combine$Combine$Parser(
-			F2(
-				function (state, stream) {
-					var _p10 = A3(_Bogdanp$elm_combine$Combine$app, p, state, stream);
-					if (_p10._2.ctor === 'Ok') {
-						return A3(
-							_Bogdanp$elm_combine$Combine$app,
-							f(_p10._2._0),
-							_p10._0,
-							_p10._1);
-					} else {
-						return {
-							ctor: '_Tuple3',
-							_0: _p10._0,
-							_1: _p10._1,
-							_2: _elm_lang$core$Result$Err(_p10._2._0)
-						};
-					}
-				}));
-	});
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['>>='] = _elm_lang$core$Basics$flip(_Bogdanp$elm_combine$Combine$andThen);
-var _Bogdanp$elm_combine$Combine$andMap = F2(
-	function (rp, lp) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['>>='],
-			lp,
-			A2(_elm_lang$core$Basics$flip, _Bogdanp$elm_combine$Combine$map, rp));
-	});
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['<*>'] = _elm_lang$core$Basics$flip(_Bogdanp$elm_combine$Combine$andMap);
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['<*'] = F2(
-	function (lp, rp) {
-		return A2(
-			_Bogdanp$elm_combine$Combine$andMap,
-			rp,
-			A2(_Bogdanp$elm_combine$Combine$map, _elm_lang$core$Basics$always, lp));
-	});
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['*>'] = F2(
-	function (lp, rp) {
-		return A2(
-			_Bogdanp$elm_combine$Combine$andMap,
-			rp,
-			A2(
-				_Bogdanp$elm_combine$Combine$map,
-				_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always),
-				lp));
-	});
-var _Bogdanp$elm_combine$Combine$between = F3(
-	function (lp, rp, p) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<*'],
-			A2(_Bogdanp$elm_combine$Combine_ops['*>'], lp, p),
-			rp);
-	});
-var _Bogdanp$elm_combine$Combine$sequence = function (ps) {
-	var accumulate = F4(
-		function (acc, ps, state, stream) {
-			accumulate:
-			while (true) {
-				var _p11 = ps;
-				if (_p11.ctor === '[]') {
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$Result$Ok(
-							_elm_lang$core$List$reverse(acc))
-					};
-				} else {
-					var _p12 = A3(_Bogdanp$elm_combine$Combine$app, _p11._0, state, stream);
-					if (_p12._2.ctor === 'Ok') {
-						var _v11 = {ctor: '::', _0: _p12._2._0, _1: acc},
-							_v12 = _p11._1,
-							_v13 = _p12._0,
-							_v14 = _p12._1;
-						acc = _v11;
-						ps = _v12;
-						state = _v13;
-						stream = _v14;
-						continue accumulate;
-					} else {
-						return {
-							ctor: '_Tuple3',
-							_0: _p12._0,
-							_1: _p12._1,
-							_2: _elm_lang$core$Result$Err(_p12._2._0)
-						};
-					}
-				}
-			}
-		});
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return A4(
-					accumulate,
-					{ctor: '[]'},
-					ps,
-					state,
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$fail = function (m) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return {
-					ctor: '_Tuple3',
-					_0: state,
-					_1: stream,
-					_2: _elm_lang$core$Result$Err(
-						{
-							ctor: '::',
-							_0: m,
-							_1: {ctor: '[]'}
-						})
-				};
-			}));
-};
-var _Bogdanp$elm_combine$Combine$emptyErr = _Bogdanp$elm_combine$Combine$Parser(
-	F2(
-		function (state, stream) {
-			return {
-				ctor: '_Tuple3',
-				_0: state,
-				_1: stream,
-				_2: _elm_lang$core$Result$Err(
-					{ctor: '[]'})
-			};
-		}));
-var _Bogdanp$elm_combine$Combine$succeed = function (res) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return {
-					ctor: '_Tuple3',
-					_0: state,
-					_1: stream,
-					_2: _elm_lang$core$Result$Ok(res)
-				};
-			}));
-};
-var _Bogdanp$elm_combine$Combine$putState = function (state) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (_p13, stream) {
-				return A3(
-					_Bogdanp$elm_combine$Combine$app,
-					_Bogdanp$elm_combine$Combine$succeed(
-						{ctor: '_Tuple0'}),
-					state,
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$modifyState = function (f) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				return A3(
-					_Bogdanp$elm_combine$Combine$app,
-					_Bogdanp$elm_combine$Combine$succeed(
-						{ctor: '_Tuple0'}),
-					f(state),
-					stream);
-			}));
-};
-var _Bogdanp$elm_combine$Combine$count = F2(
-	function (n, p) {
-		var accumulate = F2(
-			function (x, acc) {
-				return (_elm_lang$core$Native_Utils.cmp(x, 0) < 1) ? _Bogdanp$elm_combine$Combine$succeed(
-					_elm_lang$core$List$reverse(acc)) : A2(
-					_Bogdanp$elm_combine$Combine$andThen,
-					function (res) {
-						return A2(
-							accumulate,
-							x - 1,
-							{ctor: '::', _0: res, _1: acc});
-					},
-					p);
-			});
-		return A2(
-			accumulate,
-			n,
-			{ctor: '[]'});
-	});
-var _Bogdanp$elm_combine$Combine$string = function (s) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				if (A2(_elm_lang$core$String$startsWith, s, stream.input)) {
-					var len = _elm_lang$core$String$length(s);
-					var rem = A2(_elm_lang$core$String$dropLeft, len, stream.input);
-					var pos = stream.position + len;
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: _elm_lang$core$Native_Utils.update(
-							stream,
-							{input: rem, position: pos}),
-						_2: _elm_lang$core$Result$Ok(s)
-					};
-				} else {
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$Result$Err(
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$core$Basics_ops['++'],
-									'expected ',
-									_elm_lang$core$Basics$toString(s)),
-								_1: {ctor: '[]'}
-							})
-					};
-				}
-			}));
-};
-var _Bogdanp$elm_combine$Combine$parens = A2(
-	_Bogdanp$elm_combine$Combine$between,
-	_Bogdanp$elm_combine$Combine$string('('),
-	_Bogdanp$elm_combine$Combine$string(')'));
-var _Bogdanp$elm_combine$Combine$braces = A2(
-	_Bogdanp$elm_combine$Combine$between,
-	_Bogdanp$elm_combine$Combine$string('{'),
-	_Bogdanp$elm_combine$Combine$string('}'));
-var _Bogdanp$elm_combine$Combine$brackets = A2(
-	_Bogdanp$elm_combine$Combine$between,
-	_Bogdanp$elm_combine$Combine$string('['),
-	_Bogdanp$elm_combine$Combine$string(']'));
-var _Bogdanp$elm_combine$Combine$regex = function (pat) {
-	var pattern = A2(_elm_lang$core$String$startsWith, '^', pat) ? pat : A2(_elm_lang$core$Basics_ops['++'], '^', pat);
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				var _p14 = A3(
-					_elm_lang$core$Regex$find,
-					_elm_lang$core$Regex$AtMost(1),
-					_elm_lang$core$Regex$regex(pattern),
-					stream.input);
-				if ((_p14.ctor === '::') && (_p14._1.ctor === '[]')) {
-					var _p15 = _p14._0;
-					var len = _elm_lang$core$String$length(_p15.match);
-					var rem = A2(_elm_lang$core$String$dropLeft, len, stream.input);
-					var pos = stream.position + len;
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: _elm_lang$core$Native_Utils.update(
-							stream,
-							{input: rem, position: pos}),
-						_2: _elm_lang$core$Result$Ok(_p15.match)
-					};
-				} else {
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$Result$Err(
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$core$Basics_ops['++'],
-									'expected input matching Regexp /',
-									A2(_elm_lang$core$Basics_ops['++'], pattern, '/')),
-								_1: {ctor: '[]'}
-							})
-					};
-				}
-			}));
-};
-var _Bogdanp$elm_combine$Combine$whitespace = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine$regex('[ \t\r\n]*'),
-	'whitespace');
-var _Bogdanp$elm_combine$Combine$while = function (pred) {
-	var accumulate = F3(
-		function (acc, state, stream) {
-			accumulate:
-			while (true) {
-				var _p16 = _elm_lang$core$String$uncons(stream.input);
-				if (_p16.ctor === 'Just') {
-					var _p17 = _p16._0._0;
-					if (pred(_p17)) {
-						var pos = stream.position + 1;
-						var c = A2(_elm_lang$core$String$cons, _p17, '');
-						var _v17 = A2(_elm_lang$core$Basics_ops['++'], acc, c),
-							_v18 = state,
-							_v19 = _elm_lang$core$Native_Utils.update(
-							stream,
-							{input: _p16._0._1, position: pos});
-						acc = _v17;
-						state = _v18;
-						stream = _v19;
-						continue accumulate;
-					} else {
-						return {ctor: '_Tuple3', _0: state, _1: stream, _2: acc};
-					}
-				} else {
-					return {ctor: '_Tuple3', _0: state, _1: stream, _2: acc};
-				}
-			}
-		});
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				var _p18 = A3(accumulate, '', state, stream);
-				var rstate = _p18._0;
-				var rstream = _p18._1;
-				var res = _p18._2;
-				return {
-					ctor: '_Tuple3',
-					_0: rstate,
-					_1: rstream,
-					_2: _elm_lang$core$Result$Ok(res)
-				};
-			}));
-};
-var _Bogdanp$elm_combine$Combine$end = _Bogdanp$elm_combine$Combine$Parser(
-	F2(
-		function (state, stream) {
-			return _elm_lang$core$Native_Utils.eq(stream.input, '') ? {
-				ctor: '_Tuple3',
-				_0: state,
-				_1: stream,
-				_2: _elm_lang$core$Result$Ok(
-					{ctor: '_Tuple0'})
-			} : {
-				ctor: '_Tuple3',
-				_0: state,
-				_1: stream,
-				_2: _elm_lang$core$Result$Err(
-					{
-						ctor: '::',
-						_0: 'expected end of input',
-						_1: {ctor: '[]'}
-					})
-			};
-		}));
-var _Bogdanp$elm_combine$Combine$lookAhead = function (p) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				var _p19 = A3(_Bogdanp$elm_combine$Combine$app, p, state, stream);
-				if ((_p19.ctor === '_Tuple3') && (_p19._2.ctor === 'Ok')) {
-					return {
-						ctor: '_Tuple3',
-						_0: _p19._0,
-						_1: stream,
-						_2: _elm_lang$core$Result$Ok(_p19._2._0)
-					};
-				} else {
-					return _p19;
-				}
-			}));
-};
-var _Bogdanp$elm_combine$Combine$or = F2(
-	function (lp, rp) {
-		return _Bogdanp$elm_combine$Combine$Parser(
-			F2(
-				function (state, stream) {
-					var _p20 = A3(_Bogdanp$elm_combine$Combine$app, lp, state, stream);
-					if (_p20._2.ctor === 'Ok') {
-						return _p20;
-					} else {
-						var _p21 = A3(_Bogdanp$elm_combine$Combine$app, rp, state, stream);
-						if (_p21._2.ctor === 'Ok') {
-							return _p21;
-						} else {
-							return {
-								ctor: '_Tuple3',
-								_0: state,
-								_1: stream,
-								_2: _elm_lang$core$Result$Err(
-									A2(_elm_lang$core$Basics_ops['++'], _p20._2._0, _p21._2._0))
-							};
-						}
-					}
-				}));
-	});
-var _Bogdanp$elm_combine$Combine$choice = function (xs) {
-	return A3(_elm_lang$core$List$foldr, _Bogdanp$elm_combine$Combine$or, _Bogdanp$elm_combine$Combine$emptyErr, xs);
-};
-var _Bogdanp$elm_combine$Combine_ops = _Bogdanp$elm_combine$Combine_ops || {};
-_Bogdanp$elm_combine$Combine_ops['<|>'] = _Bogdanp$elm_combine$Combine$or;
-var _Bogdanp$elm_combine$Combine$optional = F2(
-	function (res, p) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<|>'],
-			p,
-			_Bogdanp$elm_combine$Combine$succeed(res));
-	});
-var _Bogdanp$elm_combine$Combine$chainl = F2(
-	function (op, p) {
-		var accumulate = function (x) {
-			return A2(
-				_Bogdanp$elm_combine$Combine_ops['<|>'],
-				A2(
-					_Bogdanp$elm_combine$Combine$andThen,
-					function (f) {
-						return A2(
-							_Bogdanp$elm_combine$Combine$andThen,
-							function (y) {
-								return accumulate(
-									A2(f, x, y));
-							},
-							p);
-					},
-					op),
-				_Bogdanp$elm_combine$Combine$succeed(x));
-		};
-		return A2(_Bogdanp$elm_combine$Combine$andThen, accumulate, p);
-	});
-var _Bogdanp$elm_combine$Combine$chainr = F2(
-	function (op, p) {
-		var accumulate = function (x) {
-			return A2(
-				_Bogdanp$elm_combine$Combine_ops['<|>'],
-				A2(
-					_Bogdanp$elm_combine$Combine$andThen,
-					function (f) {
-						return A2(
-							_Bogdanp$elm_combine$Combine$andThen,
-							function (y) {
-								return _Bogdanp$elm_combine$Combine$succeed(
-									A2(f, x, y));
-							},
-							A2(_Bogdanp$elm_combine$Combine$andThen, accumulate, p));
-					},
-					op),
-				_Bogdanp$elm_combine$Combine$succeed(x));
-		};
-		return A2(_Bogdanp$elm_combine$Combine$andThen, accumulate, p);
-	});
-var _Bogdanp$elm_combine$Combine$maybe = function (p) {
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				var _p22 = A3(_Bogdanp$elm_combine$Combine$app, p, state, stream);
-				if ((_p22.ctor === '_Tuple3') && (_p22._2.ctor === 'Ok')) {
-					return {
-						ctor: '_Tuple3',
-						_0: _p22._0,
-						_1: _p22._1,
-						_2: _elm_lang$core$Result$Ok(
-							_elm_lang$core$Maybe$Just(_p22._2._0))
-					};
-				} else {
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$Result$Ok(_elm_lang$core$Maybe$Nothing)
-					};
-				}
-			}));
-};
-var _Bogdanp$elm_combine$Combine$many = function (p) {
-	var accumulate = F3(
-		function (acc, state, stream) {
-			accumulate:
-			while (true) {
-				var _p23 = A3(_Bogdanp$elm_combine$Combine$app, p, state, stream);
-				if ((_p23.ctor === '_Tuple3') && (_p23._2.ctor === 'Ok')) {
-					var _p25 = _p23._1;
-					var _p24 = _p23._0;
-					if (_elm_lang$core$Native_Utils.eq(stream, _p25)) {
-						return {
-							ctor: '_Tuple3',
-							_0: _p24,
-							_1: _p25,
-							_2: _elm_lang$core$List$reverse(acc)
-						};
-					} else {
-						var _v25 = {ctor: '::', _0: _p23._2._0, _1: acc},
-							_v26 = _p24,
-							_v27 = _p25;
-						acc = _v25;
-						state = _v26;
-						stream = _v27;
-						continue accumulate;
-					}
-				} else {
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$List$reverse(acc)
-					};
-				}
-			}
-		});
-	return _Bogdanp$elm_combine$Combine$Parser(
-		F2(
-			function (state, stream) {
-				var _p26 = A3(
-					accumulate,
-					{ctor: '[]'},
-					state,
-					stream);
-				var rstate = _p26._0;
-				var rstream = _p26._1;
-				var res = _p26._2;
-				return {
-					ctor: '_Tuple3',
-					_0: rstate,
-					_1: rstream,
-					_2: _elm_lang$core$Result$Ok(res)
-				};
-			}));
-};
-var _Bogdanp$elm_combine$Combine$many1 = function (p) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<*>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<$>'],
-			F2(
-				function (x, y) {
-					return {ctor: '::', _0: x, _1: y};
-				}),
-			p),
-		_Bogdanp$elm_combine$Combine$many(p));
-};
-var _Bogdanp$elm_combine$Combine$skipMany1 = function (p) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<$'],
-		{ctor: '_Tuple0'},
-		_Bogdanp$elm_combine$Combine$many1(
-			_Bogdanp$elm_combine$Combine$skip(p)));
-};
-var _Bogdanp$elm_combine$Combine$sepBy1 = F2(
-	function (sep, p) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['<$>'],
-				F2(
-					function (x, y) {
-						return {ctor: '::', _0: x, _1: y};
-					}),
-				p),
-			_Bogdanp$elm_combine$Combine$many(
-				A2(_Bogdanp$elm_combine$Combine_ops['*>'], sep, p)));
-	});
-var _Bogdanp$elm_combine$Combine$sepBy = F2(
-	function (sep, p) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<|>'],
-			A2(_Bogdanp$elm_combine$Combine$sepBy1, sep, p),
-			_Bogdanp$elm_combine$Combine$succeed(
-				{ctor: '[]'}));
-	});
-var _Bogdanp$elm_combine$Combine$sepEndBy1 = F2(
-	function (sep, p) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<*'],
-			A2(_Bogdanp$elm_combine$Combine$sepBy1, sep, p),
-			_Bogdanp$elm_combine$Combine$maybe(sep));
-	});
-var _Bogdanp$elm_combine$Combine$sepEndBy = F2(
-	function (sep, p) {
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<|>'],
-			A2(_Bogdanp$elm_combine$Combine$sepEndBy1, sep, p),
-			_Bogdanp$elm_combine$Combine$succeed(
-				{ctor: '[]'}));
-	});
-var _Bogdanp$elm_combine$Combine$skipMany = function (p) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<$'],
-		{ctor: '_Tuple0'},
-		_Bogdanp$elm_combine$Combine$many(
-			_Bogdanp$elm_combine$Combine$skip(p)));
-};
-var _Bogdanp$elm_combine$Combine$manyTill = F2(
-	function (p, end) {
-		var accumulate = F3(
-			function (acc, state, stream) {
-				accumulate:
-				while (true) {
-					var _p27 = A3(_Bogdanp$elm_combine$Combine$app, end, state, stream);
-					if (_p27._2.ctor === 'Ok') {
-						return {
-							ctor: '_Tuple3',
-							_0: _p27._0,
-							_1: _p27._1,
-							_2: _elm_lang$core$Result$Ok(
-								_elm_lang$core$List$reverse(acc))
-						};
-					} else {
-						var _p28 = A3(_Bogdanp$elm_combine$Combine$app, p, state, stream);
-						if ((_p28.ctor === '_Tuple3') && (_p28._2.ctor === 'Ok')) {
-							var _v30 = {ctor: '::', _0: _p28._2._0, _1: acc},
-								_v31 = _p28._0,
-								_v32 = _p28._1;
-							acc = _v30;
-							state = _v31;
-							stream = _v32;
-							continue accumulate;
-						} else {
-							return {
-								ctor: '_Tuple3',
-								_0: _p27._0,
-								_1: _p27._1,
-								_2: _elm_lang$core$Result$Err(_p27._2._0)
-							};
-						}
-					}
-				}
-			});
-		return _Bogdanp$elm_combine$Combine$Parser(
-			accumulate(
-				{ctor: '[]'}));
-	});
-
-var _Bogdanp$elm_combine$Combine_Char$crlf = A2(
-	_Bogdanp$elm_combine$Combine_ops['<$'],
-	_elm_lang$core$Native_Utils.chr('\n'),
-	A2(
-		_Bogdanp$elm_combine$Combine_ops['<?>'],
-		_Bogdanp$elm_combine$Combine$regex('\r\n'),
-		'expected crlf'));
-var _Bogdanp$elm_combine$Combine_Char$satisfy = function (pred) {
-	return _Bogdanp$elm_combine$Combine$primitive(
-		F2(
-			function (state, stream) {
-				var message = 'could not satisfy predicate';
-				var _p0 = _elm_lang$core$String$uncons(stream.input);
-				if (_p0.ctor === 'Just') {
-					var _p1 = _p0._0._0;
-					return pred(_p1) ? {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: _elm_lang$core$Native_Utils.update(
-							stream,
-							{input: _p0._0._1, position: stream.position + 1}),
-						_2: _elm_lang$core$Result$Ok(_p1)
-					} : {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$Result$Err(
-							{
-								ctor: '::',
-								_0: message,
-								_1: {ctor: '[]'}
-							})
-					};
-				} else {
-					return {
-						ctor: '_Tuple3',
-						_0: state,
-						_1: stream,
-						_2: _elm_lang$core$Result$Err(
-							{
-								ctor: '::',
-								_0: message,
-								_1: {ctor: '[]'}
-							})
-					};
-				}
-			}));
-};
-var _Bogdanp$elm_combine$Combine_Char$char = function (c) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<?>'],
-		_Bogdanp$elm_combine$Combine_Char$satisfy(
-			F2(
-				function (x, y) {
-					return _elm_lang$core$Native_Utils.eq(x, y);
-				})(c)),
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			'expected ',
-			_elm_lang$core$Basics$toString(c)));
-};
-var _Bogdanp$elm_combine$Combine_Char$anyChar = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(
-		_elm_lang$core$Basics$always(true)),
-	'expected any character');
-var _Bogdanp$elm_combine$Combine_Char$oneOf = function (cs) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<?>'],
-		_Bogdanp$elm_combine$Combine_Char$satisfy(
-			A2(_elm_lang$core$Basics$flip, _elm_lang$core$List$member, cs)),
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			'expected one of ',
-			_elm_lang$core$Basics$toString(cs)));
-};
-var _Bogdanp$elm_combine$Combine_Char$noneOf = function (cs) {
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<?>'],
-		_Bogdanp$elm_combine$Combine_Char$satisfy(
-			function (_p2) {
-				return !A3(_elm_lang$core$Basics$flip, _elm_lang$core$List$member, cs, _p2);
-			}),
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			'expected none of ',
-			_elm_lang$core$Basics$toString(cs)));
-};
-var _Bogdanp$elm_combine$Combine_Char$space = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(
-		F2(
-			function (x, y) {
-				return _elm_lang$core$Native_Utils.eq(x, y);
-			})(
-			_elm_lang$core$Native_Utils.chr(' '))),
-	'expected space');
-var _Bogdanp$elm_combine$Combine_Char$tab = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(
-		F2(
-			function (x, y) {
-				return _elm_lang$core$Native_Utils.eq(x, y);
-			})(
-			_elm_lang$core$Native_Utils.chr('\t'))),
-	'expected tab');
-var _Bogdanp$elm_combine$Combine_Char$newline = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(
-		F2(
-			function (x, y) {
-				return _elm_lang$core$Native_Utils.eq(x, y);
-			})(
-			_elm_lang$core$Native_Utils.chr('\n'))),
-	'expected newline');
-var _Bogdanp$elm_combine$Combine_Char$eol = A2(_Bogdanp$elm_combine$Combine_ops['<|>'], _Bogdanp$elm_combine$Combine_Char$newline, _Bogdanp$elm_combine$Combine_Char$crlf);
-var _Bogdanp$elm_combine$Combine_Char$lower = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isLower),
-	'expected a lowercase character');
-var _Bogdanp$elm_combine$Combine_Char$upper = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isUpper),
-	'expected an uppercase character');
-var _Bogdanp$elm_combine$Combine_Char$digit = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isDigit),
-	'expected a digit');
-var _Bogdanp$elm_combine$Combine_Char$octDigit = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isOctDigit),
-	'expected an octal digit');
-var _Bogdanp$elm_combine$Combine_Char$hexDigit = A2(
-	_Bogdanp$elm_combine$Combine_ops['<?>'],
-	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isHexDigit),
-	'expected a hexadecimal digit');
-
-var _Bogdanp$elm_combine$Combine_Num$digit = function () {
-	var toDigit = function (c) {
-		return _elm_lang$core$Char$toCode(c) - _elm_lang$core$Char$toCode(
-			_elm_lang$core$Native_Utils.chr('0'));
-	};
-	return A2(
-		_Bogdanp$elm_combine$Combine_ops['<$>'],
-		toDigit,
-		A2(_Bogdanp$elm_combine$Combine_ops['<?>'], _Bogdanp$elm_combine$Combine_Char$digit, 'expected a digit'));
-}();
-var _Bogdanp$elm_combine$Combine_Num$sign = A2(
-	_Bogdanp$elm_combine$Combine$optional,
-	1,
-	_Bogdanp$elm_combine$Combine$choice(
-		{
-			ctor: '::',
-			_0: A2(
-				_Bogdanp$elm_combine$Combine_ops['<$'],
-				1,
-				_Bogdanp$elm_combine$Combine$string('+')),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_Bogdanp$elm_combine$Combine_ops['<$'],
-					-1,
-					_Bogdanp$elm_combine$Combine$string('-')),
-				_1: {ctor: '[]'}
-			}
-		}));
-var _Bogdanp$elm_combine$Combine_Num$unwrap = F2(
-	function (f, s) {
-		var _p0 = f(s);
-		if (_p0.ctor === 'Ok') {
-			return _p0._0;
-		} else {
-			return _elm_lang$core$Native_Utils.crashCase(
-				'Combine.Num',
-				{
-					start: {line: 23, column: 3},
-					end: {line: 28, column: 79}
-				},
-				_p0)(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'impossible state in Combine.Num.unwrap: ',
-					_elm_lang$core$Basics$toString(_p0._0)));
-		}
-	});
-var _Bogdanp$elm_combine$Combine_Num$toInt = _Bogdanp$elm_combine$Combine_Num$unwrap(_elm_lang$core$String$toInt);
-var _Bogdanp$elm_combine$Combine_Num$int = A2(
-	_Bogdanp$elm_combine$Combine_ops['<*>'],
-	A2(
-		_Bogdanp$elm_combine$Combine_ops['<$>'],
-		F2(
-			function (x, y) {
-				return x * y;
-			}),
-		_Bogdanp$elm_combine$Combine_Num$sign),
-	A2(
-		_Bogdanp$elm_combine$Combine_ops['<?>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<$>'],
-			_Bogdanp$elm_combine$Combine_Num$toInt,
-			_Bogdanp$elm_combine$Combine$regex('(0|[1-9][0-9]*)')),
-		'expected an integer'));
-var _Bogdanp$elm_combine$Combine_Num$toFloat = _Bogdanp$elm_combine$Combine_Num$unwrap(_elm_lang$core$String$toFloat);
-var _Bogdanp$elm_combine$Combine_Num$float = A2(
-	_Bogdanp$elm_combine$Combine_ops['<*>'],
-	A2(
-		_Bogdanp$elm_combine$Combine_ops['<$>'],
-		function (_p2) {
-			return F2(
-				function (x, y) {
-					return x * y;
-				})(
-				_elm_lang$core$Basics$toFloat(_p2));
-		},
-		_Bogdanp$elm_combine$Combine_Num$sign),
-	A2(
-		_Bogdanp$elm_combine$Combine_ops['<?>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<$>'],
-			_Bogdanp$elm_combine$Combine_Num$toFloat,
-			_Bogdanp$elm_combine$Combine$regex('(0|[1-9][0-9]*)(\\.[0-9]+)')),
-		'expected a float'));
-
-var _Bogdanp$elm_time$Time_Internal$paddedInt = A2(
-	_Bogdanp$elm_combine$Combine_ops['*>'],
-	A2(
-		_Bogdanp$elm_combine$Combine$optional,
-		'',
-		_Bogdanp$elm_combine$Combine$string('0')),
-	_Bogdanp$elm_combine$Combine_Num$int);
-var _Bogdanp$elm_time$Time_Internal$intRange = F2(
-	function (lo, hi) {
-		var validate = function (n) {
-			return ((_elm_lang$core$Native_Utils.cmp(n, lo) > -1) && (_elm_lang$core$Native_Utils.cmp(n, hi) < 1)) ? _Bogdanp$elm_combine$Combine$succeed(n) : _Bogdanp$elm_combine$Combine$fail(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'expected an integer in the range [',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						_elm_lang$core$Basics$toString(lo),
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							', ',
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								_elm_lang$core$Basics$toString(hi),
-								']')))));
-		};
-		return A2(_Bogdanp$elm_combine$Combine_ops['>>='], _Bogdanp$elm_time$Time_Internal$paddedInt, validate);
-	});
-var _Bogdanp$elm_time$Time_Internal$secondMs = 1000;
-var _Bogdanp$elm_time$Time_Internal$minuteMs = 60000;
-var _Bogdanp$elm_time$Time_Internal$hourMs = 3600000;
-var _Bogdanp$elm_time$Time_Internal$dayMs = 86400000;
-var _Bogdanp$elm_time$Time_Internal$padded = function (n) {
-	return (_elm_lang$core$Native_Utils.cmp(n, 10) < 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'0',
-		_elm_lang$core$Basics$toString(n)) : _elm_lang$core$Basics$toString(n);
-};
-var _Bogdanp$elm_time$Time_Internal$zero = {year: 0, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0};
-var _Bogdanp$elm_time$Time_Internal$offsetFromTimeData = function (_p0) {
-	var _p1 = _p0;
-	return (((A3(_elm_lang$core$Basics$clamp, 0, 23, _p1.hour) * _Bogdanp$elm_time$Time_Internal$hourMs) + (A3(_elm_lang$core$Basics$clamp, 0, 59, _p1.minute) * _Bogdanp$elm_time$Time_Internal$minuteMs)) + (A3(_elm_lang$core$Basics$clamp, 0, 59, _p1.second) * _Bogdanp$elm_time$Time_Internal$secondMs)) + A3(_elm_lang$core$Basics$clamp, 0, 999, _p1.millisecond);
-};
-var _Bogdanp$elm_time$Time_Internal$DateTimeData = F7(
-	function (a, b, c, d, e, f, g) {
-		return {year: a, month: b, day: c, hour: d, minute: e, second: f, millisecond: g};
-	});
-
-var _Bogdanp$elm_time$Time_Date$clampDay = function (day) {
-	return A3(_elm_lang$core$Basics$clamp, 1, 31, day);
-};
-var _Bogdanp$elm_time$Time_Date$clampMonth = function (month) {
-	return A3(_elm_lang$core$Basics$clamp, 1, 12, month);
-};
-var _Bogdanp$elm_time$Time_Date$daysFromYear = function (y) {
-	return (_elm_lang$core$Native_Utils.cmp(y, 0) > 0) ? ((((366 + ((y - 1) * 365)) + (((y - 1) / 4) | 0)) - (((y - 1) / 100) | 0)) + (((y - 1) / 400) | 0)) : ((_elm_lang$core$Native_Utils.cmp(y, 0) < 0) ? ((((y * 365) + ((y / 4) | 0)) - ((y / 100) | 0)) + ((y / 400) | 0)) : 0);
-};
-var _Bogdanp$elm_time$Time_Date$yearFromDays = function (ds) {
-	var y = (ds / 365) | 0;
-	var d = _Bogdanp$elm_time$Time_Date$daysFromYear(y);
-	return (_elm_lang$core$Native_Utils.cmp(ds, d) < 1) ? (y - 1) : y;
-};
-var _Bogdanp$elm_time$Time_Date$isLeapYear = function (y) {
-	return _elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Basics_ops['%'], y, 400),
-		0) || ((!_elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Basics_ops['%'], y, 100),
-		0)) && _elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Basics_ops['%'], y, 4),
-		0));
-};
-var _Bogdanp$elm_time$Time_Date$unsafeDaysInMonth = F2(
-	function (y, m) {
-		return _elm_lang$core$Native_Utils.eq(m, 1) ? 31 : ((_elm_lang$core$Native_Utils.eq(m, 2) && _Bogdanp$elm_time$Time_Date$isLeapYear(y)) ? 29 : (_elm_lang$core$Native_Utils.eq(m, 2) ? 28 : (_elm_lang$core$Native_Utils.eq(m, 3) ? 31 : (_elm_lang$core$Native_Utils.eq(m, 4) ? 30 : (_elm_lang$core$Native_Utils.eq(m, 5) ? 31 : (_elm_lang$core$Native_Utils.eq(m, 6) ? 30 : (_elm_lang$core$Native_Utils.eq(m, 7) ? 31 : (_elm_lang$core$Native_Utils.eq(m, 8) ? 31 : (_elm_lang$core$Native_Utils.eq(m, 9) ? 30 : (_elm_lang$core$Native_Utils.eq(m, 10) ? 31 : (_elm_lang$core$Native_Utils.eq(m, 11) ? 30 : (_elm_lang$core$Native_Utils.eq(m, 12) ? 31 : _elm_lang$core$Native_Utils.crash(
-			'Time.Date',
-			{
-				start: {line: 343, column: 9},
-				end: {line: 343, column: 20}
-			})(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				'invalid call to unsafeDaysInMonth: year=',
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					_elm_lang$core$Basics$toString(y),
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						' month=',
-						_elm_lang$core$Basics$toString(m)))))))))))))))));
-	});
-var _Bogdanp$elm_time$Time_Date$daysInMonth = F2(
-	function (y, m) {
-		return ((_elm_lang$core$Native_Utils.cmp(m, 1) > -1) && (_elm_lang$core$Native_Utils.cmp(m, 12) < 1)) ? _elm_lang$core$Maybe$Just(
-			A2(_Bogdanp$elm_time$Time_Date$unsafeDaysInMonth, y, m)) : _elm_lang$core$Maybe$Nothing;
-	});
-var _Bogdanp$elm_time$Time_Date$daysFromYearMonth = F2(
-	function (year, month) {
-		var go = F3(
-			function (year, month, acc) {
-				go:
-				while (true) {
-					if (_elm_lang$core$Native_Utils.eq(month, 0)) {
-						return acc;
-					} else {
-						var _v0 = year,
-							_v1 = month - 1,
-							_v2 = acc + A2(_Bogdanp$elm_time$Time_Date$unsafeDaysInMonth, year, month);
-						year = _v0;
-						month = _v1;
-						acc = _v2;
-						continue go;
-					}
-				}
-			});
-		return A3(go, year, month - 1, 0);
-	});
-var _Bogdanp$elm_time$Time_Date$daysFromYearMonthDay = F3(
-	function (year, month, day) {
-		var dds = day - 1;
-		var mds = A2(_Bogdanp$elm_time$Time_Date$daysFromYearMonth, year, month);
-		var yds = _Bogdanp$elm_time$Time_Date$daysFromYear(year);
-		return (yds + mds) + dds;
-	});
-var _Bogdanp$elm_time$Time_Date$isValidDate = F3(
-	function (year, month, day) {
-		return A2(
-			_elm_lang$core$Maybe$withDefault,
-			false,
-			A2(
-				_elm_lang$core$Maybe$map,
-				function (days) {
-					return (_elm_lang$core$Native_Utils.cmp(day, 1) > -1) && (_elm_lang$core$Native_Utils.cmp(day, days) < 1);
-				},
-				A2(_Bogdanp$elm_time$Time_Date$daysInMonth, year, month)));
-	});
-var _Bogdanp$elm_time$Time_Date$toTuple = function (_p0) {
-	var _p1 = _p0;
-	return {ctor: '_Tuple3', _0: _p1._0.year, _1: _p1._0.month, _2: _p1._0.day};
-};
-var _Bogdanp$elm_time$Time_Date$delta = F2(
-	function (_p3, _p2) {
-		var _p4 = _p3;
-		var _p7 = _p4._0;
-		var _p5 = _p2;
-		var _p6 = _p5._0;
-		return {
-			years: _p7.year - _p6.year,
-			months: ((_elm_lang$core$Basics$abs(_p7.year) * 12) + _p7.month) - ((_elm_lang$core$Basics$abs(_p6.year) * 12) + _p6.month),
-			days: A3(_Bogdanp$elm_time$Time_Date$daysFromYearMonthDay, _p7.year, _p7.month, _p7.day) - A3(_Bogdanp$elm_time$Time_Date$daysFromYearMonthDay, _p6.year, _p6.month, _p6.day)
-		};
-	});
-var _Bogdanp$elm_time$Time_Date$compare = F2(
-	function (d1, d2) {
-		return A2(
-			_elm_lang$core$Basics$compare,
-			_Bogdanp$elm_time$Time_Date$toTuple(d1),
-			_Bogdanp$elm_time$Time_Date$toTuple(d2));
-	});
-var _Bogdanp$elm_time$Time_Date$day = function (_p8) {
-	var _p9 = _p8;
-	return _p9._0.day;
-};
-var _Bogdanp$elm_time$Time_Date$month = function (_p10) {
-	var _p11 = _p10;
-	return _p11._0.month;
-};
-var _Bogdanp$elm_time$Time_Date$year = function (_p12) {
-	var _p13 = _p12;
-	return _p13._0.year;
-};
-var _Bogdanp$elm_time$Time_Date$toISO8601 = function (d) {
-	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		_elm_lang$core$Basics$toString(
-			_Bogdanp$elm_time$Time_Date$year(d)),
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			'-',
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				_Bogdanp$elm_time$Time_Internal$padded(
-					_Bogdanp$elm_time$Time_Date$month(d)),
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'-',
-					_Bogdanp$elm_time$Time_Internal$padded(
-						_Bogdanp$elm_time$Time_Date$day(d))))));
-};
-var _Bogdanp$elm_time$Time_Date$DateDelta = F3(
-	function (a, b, c) {
-		return {years: a, months: b, days: c};
-	});
-var _Bogdanp$elm_time$Time_Date$Date = function (a) {
-	return {ctor: 'Date', _0: a};
-};
-var _Bogdanp$elm_time$Time_Date$firstValid = F3(
-	function (year, month, day) {
-		var _p14 = A3(_Bogdanp$elm_time$Time_Date$isValidDate, year, month, day) ? {ctor: '_Tuple3', _0: year, _1: month, _2: day} : (A3(_Bogdanp$elm_time$Time_Date$isValidDate, year, month, day - 1) ? {ctor: '_Tuple3', _0: year, _1: month, _2: day - 1} : (A3(_Bogdanp$elm_time$Time_Date$isValidDate, year, month, day - 2) ? {ctor: '_Tuple3', _0: year, _1: month, _2: day - 2} : {ctor: '_Tuple3', _0: year, _1: month, _2: day - 3}));
-		var y = _p14._0;
-		var m = _p14._1;
-		var d = _p14._2;
-		return _Bogdanp$elm_time$Time_Date$Date(
-			{year: y, month: m, day: d});
-	});
-var _Bogdanp$elm_time$Time_Date$date = F3(
-	function (year, month, day) {
-		return A3(
-			_Bogdanp$elm_time$Time_Date$firstValid,
-			year,
-			_Bogdanp$elm_time$Time_Date$clampMonth(month),
-			_Bogdanp$elm_time$Time_Date$clampDay(day));
-	});
-var _Bogdanp$elm_time$Time_Date$fromTuple = function (_p15) {
-	var _p16 = _p15;
-	return A3(_Bogdanp$elm_time$Time_Date$date, _p16._0, _p16._1, _p16._2);
-};
-var _Bogdanp$elm_time$Time_Date$fromISO8601 = function (input) {
-	var convert = function (_p17) {
-		var _p18 = _p17;
-		var _p21 = _p18._0;
-		var _p20 = _p18._1;
-		var _p19 = _p18._2;
-		return A3(_Bogdanp$elm_time$Time_Date$isValidDate, _p21, _p20, _p19) ? _Bogdanp$elm_combine$Combine$succeed(
-			A3(_Bogdanp$elm_time$Time_Date$date, _p21, _p20, _p19)) : _Bogdanp$elm_combine$Combine$fail('invalid date');
-	};
-	var dateTuple = A2(
-		_Bogdanp$elm_combine$Combine_ops['<*>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['<$>'],
-				F3(
-					function (v0, v1, v2) {
-						return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
-					}),
-				_Bogdanp$elm_combine$Combine_Num$int),
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['*>'],
-				_Bogdanp$elm_combine$Combine$string('-'),
-				A2(_Bogdanp$elm_time$Time_Internal$intRange, 1, 12))),
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['*>'],
-			_Bogdanp$elm_combine$Combine$string('-'),
-			A2(_Bogdanp$elm_time$Time_Internal$intRange, 1, 31)));
-	var _p22 = A2(
-		_Bogdanp$elm_combine$Combine$parse,
-		A2(_Bogdanp$elm_combine$Combine_ops['>>='], dateTuple, convert),
-		input);
-	if (_p22.ctor === 'Ok') {
-		return _elm_lang$core$Result$Ok(_p22._0._2);
-	} else {
-		var messages = A2(_elm_lang$core$String$join, ' or ', _p22._0._2);
-		return _elm_lang$core$Result$Err(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				'Errors encountered at position ',
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					_elm_lang$core$Basics$toString(_p22._0._1.position),
-					A2(_elm_lang$core$Basics_ops['++'], ': ', messages))));
-	}
-};
-var _Bogdanp$elm_time$Time_Date$setYear = F2(
-	function (year, _p23) {
-		var _p24 = _p23;
-		return A3(_Bogdanp$elm_time$Time_Date$firstValid, year, _p24._0.month, _p24._0.day);
-	});
-var _Bogdanp$elm_time$Time_Date$setMonth = F2(
-	function (month, _p25) {
-		var _p26 = _p25;
-		return A3(
-			_Bogdanp$elm_time$Time_Date$firstValid,
-			_p26._0.year,
-			_Bogdanp$elm_time$Time_Date$clampMonth(month),
-			_p26._0.day);
-	});
-var _Bogdanp$elm_time$Time_Date$setDay = F2(
-	function (day, _p27) {
-		var _p28 = _p27;
-		return A3(
-			_Bogdanp$elm_time$Time_Date$firstValid,
-			_p28._0.year,
-			_p28._0.month,
-			_Bogdanp$elm_time$Time_Date$clampDay(day));
-	});
-var _Bogdanp$elm_time$Time_Date$addYears = F2(
-	function (years, _p29) {
-		var _p30 = _p29;
-		return A3(_Bogdanp$elm_time$Time_Date$firstValid, _p30._0.year + years, _p30._0.month, _p30._0.day);
-	});
-var _Bogdanp$elm_time$Time_Date$addMonths = F2(
-	function (months, _p31) {
-		var _p32 = _p31;
-		var _p33 = _p32._0.year;
-		var ms = (((_elm_lang$core$Basics$abs(_p33) * 12) + _p32._0.month) - 1) + months;
-		var sign = (_elm_lang$core$Native_Utils.cmp(_p33, 0) < 0) ? -1 : 1;
-		return A3(
-			_Bogdanp$elm_time$Time_Date$firstValid,
-			((sign * ms) / 12) | 0,
-			A2(_elm_lang$core$Basics_ops['%'], ms, 12) + 1,
-			_p32._0.day);
-	});
-var _Bogdanp$elm_time$Time_Date$dateFromDays = function (ds) {
-	var d400 = _Bogdanp$elm_time$Time_Date$daysFromYear(400);
-	var y400 = (ds / d400) | 0;
-	var d = A2(_elm_lang$core$Basics$rem, ds, d400);
-	var year = _Bogdanp$elm_time$Time_Date$yearFromDays(d + 1);
-	var leap = _Bogdanp$elm_time$Time_Date$isLeapYear(year) ? F2(
-		function (x, y) {
-			return x + y;
-		})(1) : _elm_lang$core$Basics$identity;
-	var doy = d - _Bogdanp$elm_time$Time_Date$daysFromYear(year);
-	var _p34 = (_elm_lang$core$Native_Utils.cmp(doy, 31) < 0) ? {ctor: '_Tuple2', _0: 1, _1: doy + 1} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(59)) < 0) ? {ctor: '_Tuple2', _0: 2, _1: (doy - 31) + 1} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(90)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 3,
-		_1: (doy - leap(59)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(120)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 4,
-		_1: (doy - leap(90)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(151)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 5,
-		_1: (doy - leap(120)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(181)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 6,
-		_1: (doy - leap(151)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(212)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 7,
-		_1: (doy - leap(181)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(243)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 8,
-		_1: (doy - leap(212)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(273)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 9,
-		_1: (doy - leap(243)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(304)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 10,
-		_1: (doy - leap(273)) + 1
-	} : ((_elm_lang$core$Native_Utils.cmp(
-		doy,
-		leap(334)) < 0) ? {
-		ctor: '_Tuple2',
-		_0: 11,
-		_1: (doy - leap(304)) + 1
-	} : {
-		ctor: '_Tuple2',
-		_0: 12,
-		_1: (doy - leap(334)) + 1
-	}))))))))));
-	var month = _p34._0;
-	var day = _p34._1;
-	return _Bogdanp$elm_time$Time_Date$Date(
-		{year: year + (y400 * 400), month: month, day: day});
-};
-var _Bogdanp$elm_time$Time_Date$addDays = F2(
-	function (days, _p35) {
-		var _p36 = _p35;
-		return _Bogdanp$elm_time$Time_Date$dateFromDays(
-			A2(
-				F2(
-					function (x, y) {
-						return x + y;
-					}),
-				days,
-				A3(_Bogdanp$elm_time$Time_Date$daysFromYearMonthDay, _p36._0.year, _p36._0.month, _p36._0.day)));
-	});
-var _Bogdanp$elm_time$Time_Date$Sun = {ctor: 'Sun'};
-var _Bogdanp$elm_time$Time_Date$Sat = {ctor: 'Sat'};
-var _Bogdanp$elm_time$Time_Date$Fri = {ctor: 'Fri'};
-var _Bogdanp$elm_time$Time_Date$Thu = {ctor: 'Thu'};
-var _Bogdanp$elm_time$Time_Date$Wed = {ctor: 'Wed'};
-var _Bogdanp$elm_time$Time_Date$Tue = {ctor: 'Tue'};
-var _Bogdanp$elm_time$Time_Date$Mon = {ctor: 'Mon'};
-var _Bogdanp$elm_time$Time_Date$weekday = function (_p37) {
-	var _p38 = _p37;
-	var _p40 = _p38._0.year;
-	var _p39 = _p38._0.month;
-	var y = (_elm_lang$core$Native_Utils.cmp(_p39, 3) < 0) ? (_p40 - 1) : _p40;
-	var m = _elm_lang$core$Native_Utils.eq(_p39, 1) ? 0 : (_elm_lang$core$Native_Utils.eq(_p39, 2) ? 3 : (_elm_lang$core$Native_Utils.eq(_p39, 3) ? 2 : (_elm_lang$core$Native_Utils.eq(_p39, 4) ? 5 : (_elm_lang$core$Native_Utils.eq(_p39, 5) ? 0 : (_elm_lang$core$Native_Utils.eq(_p39, 6) ? 3 : (_elm_lang$core$Native_Utils.eq(_p39, 7) ? 5 : (_elm_lang$core$Native_Utils.eq(_p39, 8) ? 1 : (_elm_lang$core$Native_Utils.eq(_p39, 9) ? 4 : (_elm_lang$core$Native_Utils.eq(_p39, 10) ? 6 : (_elm_lang$core$Native_Utils.eq(_p39, 11) ? 2 : 4))))))))));
-	var d = A2(_elm_lang$core$Basics_ops['%'], ((((y + ((y / 4) | 0)) - ((y / 100) | 0)) + ((y / 400) | 0)) + m) + _p38._0.day, 7);
-	return _elm_lang$core$Native_Utils.eq(d, 0) ? _Bogdanp$elm_time$Time_Date$Sun : (_elm_lang$core$Native_Utils.eq(d, 1) ? _Bogdanp$elm_time$Time_Date$Mon : (_elm_lang$core$Native_Utils.eq(d, 2) ? _Bogdanp$elm_time$Time_Date$Tue : (_elm_lang$core$Native_Utils.eq(d, 3) ? _Bogdanp$elm_time$Time_Date$Wed : (_elm_lang$core$Native_Utils.eq(d, 4) ? _Bogdanp$elm_time$Time_Date$Thu : (_elm_lang$core$Native_Utils.eq(d, 5) ? _Bogdanp$elm_time$Time_Date$Fri : _Bogdanp$elm_time$Time_Date$Sat)))));
-};
 
 var _elm_lang$core$Dict$foldr = F3(
 	function (f, acc, t) {
@@ -6218,507 +4633,6 @@ var _elm_lang$core$Time$subMap = F2(
 			});
 	});
 _elm_lang$core$Native_Platform.effectManagers['Time'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Time$init, onEffects: _elm_lang$core$Time$onEffects, onSelfMsg: _elm_lang$core$Time$onSelfMsg, tag: 'sub', subMap: _elm_lang$core$Time$subMap};
-
-var _Bogdanp$elm_time$Time_DateTime$isValidTime = F4(
-	function (hour, minute, second, millisecond) {
-		return (_elm_lang$core$Native_Utils.cmp(hour, 0) > -1) && ((_elm_lang$core$Native_Utils.cmp(hour, 24) < 0) && ((_elm_lang$core$Native_Utils.cmp(minute, 0) > -1) && ((_elm_lang$core$Native_Utils.cmp(minute, 60) < 0) && ((_elm_lang$core$Native_Utils.cmp(second, 0) > -1) && ((_elm_lang$core$Native_Utils.cmp(second, 60) < 0) && ((_elm_lang$core$Native_Utils.cmp(millisecond, 0) > -1) && (_elm_lang$core$Native_Utils.cmp(millisecond, 1000) < 0)))))));
-	});
-var _Bogdanp$elm_time$Time_DateTime$delta = F2(
-	function (_p1, _p0) {
-		var _p2 = _p1;
-		var _p6 = _p2._0;
-		var _p3 = _p0;
-		var _p5 = _p3._0;
-		var _p4 = A2(_Bogdanp$elm_time$Time_Date$delta, _p6.date, _p5.date);
-		var years = _p4.years;
-		var months = _p4.months;
-		var days = _p4.days;
-		var milliseconds = (days * _Bogdanp$elm_time$Time_Internal$dayMs) + (_p6.offset - _p5.offset);
-		var hours = (milliseconds / _Bogdanp$elm_time$Time_Internal$hourMs) | 0;
-		var minutes = (milliseconds / _Bogdanp$elm_time$Time_Internal$minuteMs) | 0;
-		var seconds = (milliseconds / _Bogdanp$elm_time$Time_Internal$secondMs) | 0;
-		return {years: years, months: months, days: days, hours: hours, minutes: minutes, seconds: seconds, milliseconds: milliseconds};
-	});
-var _Bogdanp$elm_time$Time_DateTime$millisecond = function (_p7) {
-	var _p8 = _p7;
-	return A2(
-		_elm_lang$core$Basics_ops['%'],
-		A2(
-			_elm_lang$core$Basics_ops['%'],
-			A2(_elm_lang$core$Basics_ops['%'], _p8._0.offset, _Bogdanp$elm_time$Time_Internal$hourMs),
-			_Bogdanp$elm_time$Time_Internal$minuteMs),
-		_Bogdanp$elm_time$Time_Internal$secondMs);
-};
-var _Bogdanp$elm_time$Time_DateTime$second = function (_p9) {
-	var _p10 = _p9;
-	return (A2(
-		_elm_lang$core$Basics_ops['%'],
-		A2(_elm_lang$core$Basics_ops['%'], _p10._0.offset, _Bogdanp$elm_time$Time_Internal$hourMs),
-		_Bogdanp$elm_time$Time_Internal$minuteMs) / _Bogdanp$elm_time$Time_Internal$secondMs) | 0;
-};
-var _Bogdanp$elm_time$Time_DateTime$minute = function (_p11) {
-	var _p12 = _p11;
-	return (A2(_elm_lang$core$Basics_ops['%'], _p12._0.offset, _Bogdanp$elm_time$Time_Internal$hourMs) / _Bogdanp$elm_time$Time_Internal$minuteMs) | 0;
-};
-var _Bogdanp$elm_time$Time_DateTime$hour = function (_p13) {
-	var _p14 = _p13;
-	return (_p14._0.offset / _Bogdanp$elm_time$Time_Internal$hourMs) | 0;
-};
-var _Bogdanp$elm_time$Time_DateTime$toTuple = function (_p15) {
-	var _p16 = _p15;
-	var _p18 = _p16;
-	var _p17 = _Bogdanp$elm_time$Time_Date$toTuple(_p16._0.date);
-	var year = _p17._0;
-	var month = _p17._1;
-	var day = _p17._2;
-	return {
-		ctor: '_Tuple7',
-		_0: year,
-		_1: month,
-		_2: day,
-		_3: _Bogdanp$elm_time$Time_DateTime$hour(_p18),
-		_4: _Bogdanp$elm_time$Time_DateTime$minute(_p18),
-		_5: _Bogdanp$elm_time$Time_DateTime$second(_p18),
-		_6: _Bogdanp$elm_time$Time_DateTime$millisecond(_p18)
-	};
-};
-var _Bogdanp$elm_time$Time_DateTime$weekday = function (_p19) {
-	var _p20 = _p19;
-	return _Bogdanp$elm_time$Time_Date$weekday(_p20._0.date);
-};
-var _Bogdanp$elm_time$Time_DateTime$day = function (_p21) {
-	var _p22 = _p21;
-	return _Bogdanp$elm_time$Time_Date$day(_p22._0.date);
-};
-var _Bogdanp$elm_time$Time_DateTime$month = function (_p23) {
-	var _p24 = _p23;
-	return _Bogdanp$elm_time$Time_Date$month(_p24._0.date);
-};
-var _Bogdanp$elm_time$Time_DateTime$year = function (_p25) {
-	var _p26 = _p25;
-	return _Bogdanp$elm_time$Time_Date$year(_p26._0.date);
-};
-var _Bogdanp$elm_time$Time_DateTime$toISO8601 = function (time) {
-	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		_elm_lang$core$Basics$toString(
-			_Bogdanp$elm_time$Time_DateTime$year(time)),
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			'-',
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				_Bogdanp$elm_time$Time_Internal$padded(
-					_Bogdanp$elm_time$Time_DateTime$month(time)),
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'-',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						_Bogdanp$elm_time$Time_Internal$padded(
-							_Bogdanp$elm_time$Time_DateTime$day(time)),
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							'T',
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								_Bogdanp$elm_time$Time_Internal$padded(
-									_Bogdanp$elm_time$Time_DateTime$hour(time)),
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									':',
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										_Bogdanp$elm_time$Time_Internal$padded(
-											_Bogdanp$elm_time$Time_DateTime$minute(time)),
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											':',
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												_Bogdanp$elm_time$Time_Internal$padded(
-													_Bogdanp$elm_time$Time_DateTime$second(time)),
-												'Z')))))))))));
-};
-var _Bogdanp$elm_time$Time_DateTime$compare = F2(
-	function (dt1, dt2) {
-		return A2(
-			_elm_lang$core$Basics$compare,
-			_Bogdanp$elm_time$Time_DateTime$toISO8601(dt1),
-			_Bogdanp$elm_time$Time_DateTime$toISO8601(dt2));
-	});
-var _Bogdanp$elm_time$Time_DateTime$date = function (_p27) {
-	var _p28 = _p27;
-	return _p28._0.date;
-};
-var _Bogdanp$elm_time$Time_DateTime$zero = _Bogdanp$elm_time$Time_Internal$zero;
-var _Bogdanp$elm_time$Time_DateTime$DateTimeDelta = F7(
-	function (a, b, c, d, e, f, g) {
-		return {years: a, months: b, days: c, hours: d, minutes: e, seconds: f, milliseconds: g};
-	});
-var _Bogdanp$elm_time$Time_DateTime$DateTime = function (a) {
-	return {ctor: 'DateTime', _0: a};
-};
-var _Bogdanp$elm_time$Time_DateTime$dateTime = function (_p29) {
-	var _p30 = _p29;
-	return _Bogdanp$elm_time$Time_DateTime$DateTime(
-		{
-			date: A3(_Bogdanp$elm_time$Time_Date$date, _p30.year, _p30.month, _p30.day),
-			offset: _Bogdanp$elm_time$Time_Internal$offsetFromTimeData(_p30)
-		});
-};
-var _Bogdanp$elm_time$Time_DateTime$epoch = _Bogdanp$elm_time$Time_DateTime$dateTime(
-	_elm_lang$core$Native_Utils.update(
-		_Bogdanp$elm_time$Time_DateTime$zero,
-		{year: 1970}));
-var _Bogdanp$elm_time$Time_DateTime$toTimestamp = function (time) {
-	return _elm_lang$core$Basics$toFloat(
-		function (_) {
-			return _.milliseconds;
-		}(
-			A2(_Bogdanp$elm_time$Time_DateTime$delta, time, _Bogdanp$elm_time$Time_DateTime$epoch)));
-};
-var _Bogdanp$elm_time$Time_DateTime$fromTuple = function (_p31) {
-	var _p32 = _p31;
-	return _Bogdanp$elm_time$Time_DateTime$dateTime(
-		{year: _p32._0, month: _p32._1, day: _p32._2, hour: _p32._3, minute: _p32._4, second: _p32._5, millisecond: _p32._6});
-};
-var _Bogdanp$elm_time$Time_DateTime$mkDateTime = F2(
-	function (date, time) {
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: date,
-				offset: _Bogdanp$elm_time$Time_Internal$offsetFromTimeData(time)
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setHour = F2(
-	function (hour, _p33) {
-		var _p34 = _p33;
-		var _p35 = _p34;
-		return A2(
-			_Bogdanp$elm_time$Time_DateTime$mkDateTime,
-			_p34._0.date,
-			{
-				hour: hour,
-				minute: _Bogdanp$elm_time$Time_DateTime$minute(_p35),
-				second: _Bogdanp$elm_time$Time_DateTime$second(_p35),
-				millisecond: _Bogdanp$elm_time$Time_DateTime$millisecond(_p35)
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setMinute = F2(
-	function (minute, _p36) {
-		var _p37 = _p36;
-		var _p38 = _p37;
-		return A2(
-			_Bogdanp$elm_time$Time_DateTime$mkDateTime,
-			_p37._0.date,
-			{
-				hour: _Bogdanp$elm_time$Time_DateTime$hour(_p38),
-				minute: minute,
-				second: _Bogdanp$elm_time$Time_DateTime$second(_p38),
-				millisecond: _Bogdanp$elm_time$Time_DateTime$millisecond(_p38)
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setSecond = F2(
-	function (second, _p39) {
-		var _p40 = _p39;
-		var _p41 = _p40;
-		return A2(
-			_Bogdanp$elm_time$Time_DateTime$mkDateTime,
-			_p40._0.date,
-			{
-				hour: _Bogdanp$elm_time$Time_DateTime$hour(_p41),
-				minute: _Bogdanp$elm_time$Time_DateTime$minute(_p41),
-				second: second,
-				millisecond: _Bogdanp$elm_time$Time_DateTime$millisecond(_p41)
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setMillisecond = F2(
-	function (millisecond, _p42) {
-		var _p43 = _p42;
-		var _p44 = _p43;
-		return A2(
-			_Bogdanp$elm_time$Time_DateTime$mkDateTime,
-			_p43._0.date,
-			{
-				hour: _Bogdanp$elm_time$Time_DateTime$hour(_p44),
-				minute: _Bogdanp$elm_time$Time_DateTime$minute(_p44),
-				second: _Bogdanp$elm_time$Time_DateTime$second(_p44),
-				millisecond: millisecond
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setDate = F2(
-	function (date, _p45) {
-		var _p46 = _p45;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{date: date, offset: _p46._0.offset});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setYear = F2(
-	function (year, _p47) {
-		var _p48 = _p47;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$setYear, year, _p48._0.date),
-				offset: _p48._0.offset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setMonth = F2(
-	function (month, _p49) {
-		var _p50 = _p49;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$setMonth, month, _p50._0.date),
-				offset: _p50._0.offset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$setDay = F2(
-	function (day, _p51) {
-		var _p52 = _p51;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$setDay, day, _p52._0.date),
-				offset: _p52._0.offset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$addYears = F2(
-	function (years, _p53) {
-		var _p54 = _p53;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$addYears, years, _p54._0.date),
-				offset: _p54._0.offset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$addMonths = F2(
-	function (months, _p55) {
-		var _p56 = _p55;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$addMonths, months, _p56._0.date),
-				offset: _p56._0.offset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$addDays = F2(
-	function (days, _p57) {
-		var _p58 = _p57;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$addDays, days, _p58._0.date),
-				offset: _p58._0.offset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$addMilliseconds = F2(
-	function (ms, _p59) {
-		var _p60 = _p59;
-		var total = ms + _p60._0.offset;
-		var _p61 = function () {
-			if (_elm_lang$core$Native_Utils.cmp(total, 0) < 0) {
-				var offset = A2(_elm_lang$core$Basics$rem, total, _Bogdanp$elm_time$Time_Internal$dayMs);
-				var days = 0 - (((_elm_lang$core$Basics$abs(total) / _Bogdanp$elm_time$Time_Internal$dayMs) | 0) + 1);
-				return _elm_lang$core$Native_Utils.eq(offset, 0) ? {ctor: '_Tuple2', _0: days + 1, _1: 0} : {
-					ctor: '_Tuple2',
-					_0: days,
-					_1: _Bogdanp$elm_time$Time_Internal$dayMs + A2(_elm_lang$core$Basics$rem, offset, _Bogdanp$elm_time$Time_Internal$dayMs)
-				};
-			} else {
-				return {
-					ctor: '_Tuple2',
-					_0: (total / _Bogdanp$elm_time$Time_Internal$dayMs) | 0,
-					_1: A2(_elm_lang$core$Basics$rem, total, _Bogdanp$elm_time$Time_Internal$dayMs)
-				};
-			}
-		}();
-		var days = _p61._0;
-		var newOffset = _p61._1;
-		return _Bogdanp$elm_time$Time_DateTime$DateTime(
-			{
-				date: A2(_Bogdanp$elm_time$Time_Date$addDays, days, _p60._0.date),
-				offset: newOffset
-			});
-	});
-var _Bogdanp$elm_time$Time_DateTime$addHours = F2(
-	function (hours, time) {
-		return A2(_Bogdanp$elm_time$Time_DateTime$addMilliseconds, hours * _Bogdanp$elm_time$Time_Internal$hourMs, time);
-	});
-var _Bogdanp$elm_time$Time_DateTime$addMinutes = F2(
-	function (minutes, time) {
-		return A2(_Bogdanp$elm_time$Time_DateTime$addMilliseconds, minutes * _Bogdanp$elm_time$Time_Internal$minuteMs, time);
-	});
-var _Bogdanp$elm_time$Time_DateTime$fromISO8601 = function (input) {
-	var convert = function (_p62) {
-		var _p63 = _p62;
-		var _p69 = _p63._0._0;
-		var _p68 = _p63._1._2;
-		var _p67 = _p63._0._1;
-		var _p66 = _p63._1._1;
-		var _p65 = _p63._1._0;
-		var _p64 = _p63._0._2;
-		return (A3(_Bogdanp$elm_time$Time_Date$isValidDate, _p69, _p67, _p64) && A4(_Bogdanp$elm_time$Time_DateTime$isValidTime, _p65, _p66, _p68, 0)) ? _Bogdanp$elm_combine$Combine$succeed(
-			A2(
-				_Bogdanp$elm_time$Time_DateTime$addMinutes,
-				0 - _p63._2,
-				_Bogdanp$elm_time$Time_DateTime$dateTime(
-					A7(_Bogdanp$elm_time$Time_Internal$DateTimeData, _p69, _p67, _p64, _p65, _p66, _p68, _p63._1._3)))) : _Bogdanp$elm_combine$Combine$fail('invalid date');
-	};
-	var minutes = A2(
-		_Bogdanp$elm_combine$Combine_ops['<*>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['<$>'],
-				F3(
-					function (s, h, m) {
-						return ((s * h) * 60) + (s * m);
-					}),
-				_Bogdanp$elm_combine$Combine_Num$sign),
-			A2(_Bogdanp$elm_time$Time_Internal$intRange, 0, 23)),
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['*>'],
-			_Bogdanp$elm_combine$Combine$string(':'),
-			A2(_Bogdanp$elm_time$Time_Internal$intRange, 0, 59)));
-	var offset = A2(
-		_Bogdanp$elm_combine$Combine_ops['<|>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<$'],
-			0,
-			_Bogdanp$elm_combine$Combine$string('Z')),
-		minutes);
-	var date = A2(
-		_Bogdanp$elm_combine$Combine_ops['<*>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['<$>'],
-				F3(
-					function (v0, v1, v2) {
-						return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
-					}),
-				_Bogdanp$elm_combine$Combine_Num$int),
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['*>'],
-				_Bogdanp$elm_combine$Combine$string('-'),
-				A2(_Bogdanp$elm_time$Time_Internal$intRange, 1, 12))),
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['*>'],
-			_Bogdanp$elm_combine$Combine$string('-'),
-			A2(_Bogdanp$elm_time$Time_Internal$intRange, 1, 31)));
-	var fraction = function () {
-		var convert = F2(
-			function (padding, _p70) {
-				var _p71 = _p70;
-				var _p73 = _p71._1;
-				var _p72 = (_elm_lang$core$Native_Utils.cmp(_p73, 3) > 0) ? {
-					ctor: '_Tuple2',
-					_0: 1,
-					_1: Math.pow(10, _p73 - 3)
-				} : {
-					ctor: '_Tuple2',
-					_0: (1000 / Math.pow(10, _p73)) | 0,
-					_1: 1
-				};
-				var multiplier = _p72._0;
-				var remainder = _p72._1;
-				return ((((_p71._0 * multiplier) / padding) | 0) / remainder) | 0;
-			});
-		var digits = A2(
-			_Bogdanp$elm_combine$Combine_ops['<$>'],
-			function (n) {
-				return {
-					ctor: '_Tuple2',
-					_0: n,
-					_1: _elm_lang$core$String$length(
-						_elm_lang$core$Basics$toString(n))
-				};
-			},
-			_Bogdanp$elm_combine$Combine_Num$int);
-		var padding = A2(
-			_Bogdanp$elm_combine$Combine_ops['<$>'],
-			function (p) {
-				return Math.pow(
-					10,
-					_elm_lang$core$String$length(p));
-			},
-			_Bogdanp$elm_combine$Combine$regex('0*'));
-		return A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(_Bogdanp$elm_combine$Combine_ops['<$>'], convert, padding),
-			digits);
-	}();
-	var time = A2(
-		_Bogdanp$elm_combine$Combine_ops['<*>'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['<*>'],
-				A2(
-					_Bogdanp$elm_combine$Combine_ops['<$>'],
-					F4(
-						function (v0, v1, v2, v3) {
-							return {ctor: '_Tuple4', _0: v0, _1: v1, _2: v2, _3: v3};
-						}),
-					A2(
-						_Bogdanp$elm_combine$Combine_ops['*>'],
-						_Bogdanp$elm_combine$Combine$string('T'),
-						A2(_Bogdanp$elm_time$Time_Internal$intRange, 0, 23))),
-				A2(
-					_Bogdanp$elm_combine$Combine_ops['*>'],
-					_Bogdanp$elm_combine$Combine$string(':'),
-					A2(_Bogdanp$elm_time$Time_Internal$intRange, 0, 59))),
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['*>'],
-				_Bogdanp$elm_combine$Combine$string(':'),
-				A2(_Bogdanp$elm_time$Time_Internal$intRange, 0, 59))),
-		A2(
-			_Bogdanp$elm_combine$Combine$optional,
-			0,
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['*>'],
-				_Bogdanp$elm_combine$Combine$regex('[,.]'),
-				fraction)));
-	var datetime = A2(
-		_Bogdanp$elm_combine$Combine_ops['<*'],
-		A2(
-			_Bogdanp$elm_combine$Combine_ops['<*>'],
-			A2(
-				_Bogdanp$elm_combine$Combine_ops['<*>'],
-				A2(
-					_Bogdanp$elm_combine$Combine_ops['<$>'],
-					F3(
-						function (v0, v1, v2) {
-							return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
-						}),
-					date),
-				time),
-			offset),
-		_Bogdanp$elm_combine$Combine$end);
-	var _p74 = A2(
-		_Bogdanp$elm_combine$Combine$parse,
-		A2(_Bogdanp$elm_combine$Combine_ops['>>='], datetime, convert),
-		input);
-	if (_p74.ctor === 'Ok') {
-		return _elm_lang$core$Result$Ok(_p74._0._2);
-	} else {
-		var messages = A2(_elm_lang$core$String$join, ' or ', _p74._0._2);
-		return _elm_lang$core$Result$Err(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				'Errors encountered at position ',
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					_elm_lang$core$Basics$toString(_p74._0._1.position),
-					A2(_elm_lang$core$Basics_ops['++'], ': ', messages))));
-	}
-};
-var _Bogdanp$elm_time$Time_DateTime$addSeconds = F2(
-	function (seconds, time) {
-		return A2(_Bogdanp$elm_time$Time_DateTime$addMilliseconds, seconds * _Bogdanp$elm_time$Time_Internal$secondMs, time);
-	});
-var _Bogdanp$elm_time$Time_DateTime$fromTimestamp = function (timestamp) {
-	return A2(
-		_Bogdanp$elm_time$Time_DateTime$addMilliseconds,
-		_elm_lang$core$Basics$round(timestamp),
-		_Bogdanp$elm_time$Time_DateTime$epoch);
-};
 
 //import Native.List //
 
@@ -16058,170 +13972,312 @@ var _evancz$url_parser$UrlParser$intParam = function (name) {
 	return A2(_evancz$url_parser$UrlParser$customParam, name, _evancz$url_parser$UrlParser$intParamHelp);
 };
 
-var _lucamug$elm_spa_seo_testing$Main$section3 = 'Then was the fear a little quieted\nThat in my heart\'s lake had endured throughout\nThe night, which I had passed so piteously\n\nAnd even as he, who, with distressful breath,\nForth issued from the sea upon the shore,\nTurns to the water perilous and gazes;\n\nSo did my soul, that still was fleeing onward,\nTurn itself back to re-behold the pass\nWhich never yet a living person left.';
-var _lucamug$elm_spa_seo_testing$Main$section2 = 'I cannot well repeat how there I entered,\nSo full was I of slumber at the moment\nIn which I had abandoned the true way.\n\nBut after I had reached a mountain\'s foot,\nAt that point where the valley terminated,\nWhich had with consternation pierced my heart,\n\nUpward I looked, and I beheld its shoulders\nVested already with that planet\'s rays\nWhich leadeth others right by every road.';
-var _lucamug$elm_spa_seo_testing$Main$section1 = 'Midway upon the journey of our life\nI found myself within a forest dark,\nFor the straightforward pathway had been lost.\n\nAh me! how hard a thing it is to say\nWhat was this forest savage, rough, and stern,\nWhich in the very thought renews the fear.\n\nSo bitter is it, death is little more;\nBut of the good to treat, which there I found,\nSpeak will I of the other things I saw there.';
-var _lucamug$elm_spa_seo_testing$Main$viewTop = A2(
+var _lucamug$elm_petit_train_puchi_densha$Main$section3 = _elm_lang$html$Html$text('section1 content');
+var _lucamug$elm_petit_train_puchi_densha$Main$youtube = F3(
+	function (x, y, id) {
+		return A2(
+			_elm_lang$html$Html$iframe,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$width(x),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$height(y),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src(
+							A2(_elm_lang$core$Basics_ops['++'], 'https://www.youtube.com/embed/', id)),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'frameborder', '0'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'gesture', 'media'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'allow', 'encrypted-media'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'allowfullscreen', 'allowfullscreen'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _lucamug$elm_petit_train_puchi_densha$Main$section2 = A2(
 	_elm_lang$html$Html$div,
 	{ctor: '[]'},
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html$text('Petit Train is a cheap railway toy made by LEC, Inc. (http://lecinc.info/) and sold at 100 yen shops of Daiso (ザ・ダイソー). The Japanese name is プチ電車 (\"puchi densha\"). It is based on three-car trains running on plastic rails. The middle car has the engine that run on asingle AA battery. This is the official video: https://www.youtube.com/watch?v=AVJfzkGycLo.'),
+		_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$youtube, 556, 315, 'Mv7KCTRA6UQ'),
 		_1: {
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$ul,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$li,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$a,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href('https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%81%E9%9B%BB%E8%BB%8A%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Wikipedia page in Japanese'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
+			_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$youtube, 556, 315, 'AVJfzkGycLo'),
 			_1: {ctor: '[]'}
 		}
 	});
-var _lucamug$elm_spa_seo_testing$Main$highlightColor = '#deff7e';
-var _lucamug$elm_spa_seo_testing$Main$mainDarkColor = '#4c9275';
-var _lucamug$elm_spa_seo_testing$Main$mainBrightColor = '#7effca';
-var _lucamug$elm_spa_seo_testing$Main$css = A2(
+var _lucamug$elm_petit_train_puchi_densha$Main$viewPart = function (part) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('viewPart'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h2,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(part.name),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'Id 1: ',
+								_elm_lang$core$Basics$toString(part.id1))),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'Id 2: ',
+									_elm_lang$core$Basics$toString(part.id2))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$p,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'Id 3: ',
+										_elm_lang$core$Basics$toString(part.id3))),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$img,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$src(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'https://lh3.googleusercontent.com/',
+											A2(_elm_lang$core$Basics_ops['++'], part.image1, '=w150-h150-no'))),
+									_1: {ctor: '[]'}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src(
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'https://lh3.googleusercontent.com/',
+												A2(_elm_lang$core$Basics_ops['++'], part.image2, '=w150-h150-no'))),
+										_1: {ctor: '[]'}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _lucamug$elm_petit_train_puchi_densha$Main$viewTrain = function (train) {
+	var imageReal = function () {
+		var _p0 = train.imageReal;
+		if (_p0.ctor === 'Just') {
+			return A2(
+				_elm_lang$html$Html$img,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'https://lh3.googleusercontent.com/',
+							A2(_elm_lang$core$Basics_ops['++'], _p0._0, '=w150-h150-no'))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('viewTrain-real'),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'});
+		} else {
+			return _elm_lang$html$Html$text('');
+		}
+	}();
+	var imageFront = function () {
+		var _p1 = train.imageFront;
+		if (_p1.ctor === 'Just') {
+			return A2(
+				_elm_lang$html$Html$img,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'https://lh3.googleusercontent.com/',
+							A2(_elm_lang$core$Basics_ops['++'], _p1._0, '=w150-h150-no'))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('viewTrain-front'),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'});
+		} else {
+			return _elm_lang$html$Html$text('');
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('viewTrain'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(train.name),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(train.nameJa),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: imageFront,
+					_1: {
+						ctor: '::',
+						_0: imageReal,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _lucamug$elm_petit_train_puchi_densha$Main$highlightColor = '#deff7e';
+var _lucamug$elm_petit_train_puchi_densha$Main$mainDarkColor = '#4c9275';
+var _lucamug$elm_petit_train_puchi_densha$Main$mainBrightColor = '#7effca';
+var _lucamug$elm_petit_train_puchi_densha$Main$css = A2(
 	_elm_lang$core$Basics_ops['++'],
-	'body {\n    color: #555;\n    margin: 10px;\n    font-family: sans-serif;\n    background-color: #eee;\n}\n.navigation li {\n    display: inline-block;\n}\n.history {\n    display: inline-block;\n    background-color: ',
+	'body {\n    color: #555;\n    margin: 10px;\n    font-family: sans-serif;\n    background-color: #ccc;\n}\n.navigation li {\n    display: inline-block;\n}\n.history {\n    display: inline-block;\n    background-color: ',
 	A2(
 		_elm_lang$core$Basics_ops['++'],
-		_lucamug$elm_spa_seo_testing$Main$highlightColor,
+		_lucamug$elm_petit_train_puchi_densha$Main$highlightColor,
 		A2(
 			_elm_lang$core$Basics_ops['++'],
 			';\n    margin: 0 2px;\n}\n\n.navigation {\n    padding: 0;\n}\n.navigation li {\n    display: inline-block;\n}\n.navigation a, .navigation div {\n    padding: 10px;\n}\n.navigation .selected {\n    background-color: ',
 			A2(
 				_elm_lang$core$Basics_ops['++'],
-				_lucamug$elm_spa_seo_testing$Main$mainBrightColor,
+				_lucamug$elm_petit_train_puchi_densha$Main$mainBrightColor,
 				A2(
 					_elm_lang$core$Basics_ops['++'],
 					';\n    color: black;\n}\nh2 {\n    color: ',
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						_lucamug$elm_spa_seo_testing$Main$mainDarkColor,
+						_lucamug$elm_petit_train_puchi_densha$Main$mainDarkColor,
 						A2(
 							_elm_lang$core$Basics_ops['++'],
 							';\n    margin-bottom: 2em;\n}\nh1 {\n    color: ',
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								_lucamug$elm_spa_seo_testing$Main$mainDarkColor,
+								_lucamug$elm_petit_train_puchi_densha$Main$mainDarkColor,
 								A2(
 									_elm_lang$core$Basics_ops['++'],
 									';\n    font-size: 1em;\n    border-bottom: 2px solid ',
 									A2(
 										_elm_lang$core$Basics_ops['++'],
-										_lucamug$elm_spa_seo_testing$Main$mainDarkColor,
+										_lucamug$elm_petit_train_puchi_densha$Main$mainDarkColor,
 										A2(
 											_elm_lang$core$Basics_ops['++'],
 											';\n}\na {\n    text-decoration: none;\n    color: ',
 											A2(
 												_elm_lang$core$Basics_ops['++'],
-												_lucamug$elm_spa_seo_testing$Main$mainDarkColor,
+												_lucamug$elm_petit_train_puchi_densha$Main$mainDarkColor,
 												A2(
 													_elm_lang$core$Basics_ops['++'],
 													';\n}\na:hover {\n    background-color: ',
 													A2(
 														_elm_lang$core$Basics_ops['++'],
-														_lucamug$elm_spa_seo_testing$Main$mainBrightColor,
+														_lucamug$elm_petit_train_puchi_densha$Main$mainBrightColor,
 														A2(
 															_elm_lang$core$Basics_ops['++'],
 															';\n    color: black;\n}\n.subAppHide .highlight{\n    background-color: ',
-															A2(_elm_lang$core$Basics_ops['++'], _lucamug$elm_spa_seo_testing$Main$highlightColor, ';\n}\n.subAppShow .highlight{\n    transition: all 1000ms;\n}\ntextarea {\n    width: 100%;\n    height: 80px;\n}\n#metadata {\n    font-size: 2em;\n    color: gray;\n    font-family: monospace;\n}\n#metadata p {\n    margin: 2px 0;\n}\n'))))))))))))))));
-var _lucamug$elm_spa_seo_testing$Main$subscriptions = function (model) {
+															A2(_elm_lang$core$Basics_ops['++'], _lucamug$elm_petit_train_puchi_densha$Main$highlightColor, ';\n}\n.subAppShow .highlight{\n    transition: all 1000ms;\n}\ntextarea {\n    width: 100%;\n    height: 80px;\n}\n#metadata {\n    font-size: 2em;\n    color: gray;\n    font-family: monospace;\n}\n#metadata p {\n    margin: 2px 0;\n}\n.viewTrainContainer {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n\n.viewTrain {\n    border: 0px solid red;\n    flex: 1 1 auto;\n    text-align: center;\n}\n\n.viewTrain-front {\n    clip-path: circle(50% at 50% 50%);\n    height: 150px;\n    width: 150px;\n}\n.viewTrain-real {\n    max-width: 150px;\n    max-height: 150px;\n}\n'))))))))))))))));
+var _lucamug$elm_petit_train_puchi_densha$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{ctor: '[]'});
 };
-var _lucamug$elm_spa_seo_testing$Main$extractNumber = function (text) {
+var _lucamug$elm_petit_train_puchi_densha$Main$extractNumber = function (text) {
 	var number = A3(
 		_elm_lang$core$Regex$find,
 		_elm_lang$core$Regex$All,
 		_elm_lang$core$Regex$regex('\\d{1,2}'),
 		text);
-	var _p0 = _elm_lang$core$List$head(number);
-	if (_p0.ctor === 'Nothing') {
+	var _p2 = _elm_lang$core$List$head(number);
+	if (_p2.ctor === 'Nothing') {
 		return '[NaN]';
 	} else {
-		return _p0._0.match;
+		return _p2._0.match;
 	}
 };
-var _lucamug$elm_spa_seo_testing$Main$initCmd = F2(
+var _lucamug$elm_petit_train_puchi_densha$Main$initCmd = F2(
 	function (model, location) {
 		return _elm_lang$core$Platform_Cmd$batch(
 			{ctor: '[]'});
 	});
-var _lucamug$elm_spa_seo_testing$Main$titleForJs = function (model) {
-	var time = (_elm_lang$core$Native_Utils.cmp(model.presentTime, 0) > 0) ? _elm_lang$core$Basics$toString(
-		_elm_lang$core$Basics$round((model.presentTime - model.initialTime) / 1000)) : '0';
-	var historyLength = _elm_lang$core$Basics$toString(
-		_elm_lang$core$List$length(model.history));
-	var num2 = _lucamug$elm_spa_seo_testing$Main$extractNumber(model.api2Data);
-	var num1 = _lucamug$elm_spa_seo_testing$Main$extractNumber(model.api1Data);
-	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		model.title,
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			' - ',
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				'V',
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					model.version,
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						',T',
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							time,
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								',H',
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									historyLength,
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										',A',
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											num1,
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												',B',
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													num2,
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														',',
-														A2(
-															_elm_lang$core$Basics_ops['++'],
-															_Bogdanp$elm_time$Time_DateTime$toISO8601(
-																_Bogdanp$elm_time$Time_DateTime$fromTimestamp(model.initialTime)),
-															A2(_elm_lang$core$Basics_ops['++'], ',', model.location.pathname)))))))))))))));
+var _lucamug$elm_petit_train_puchi_densha$Main$pageTitle = function (model) {
+	return model.title;
 };
-var _lucamug$elm_spa_seo_testing$Main$viewMetadata = function (model) {
+var _lucamug$elm_petit_train_puchi_densha$Main$viewMetadata = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -16244,7 +14300,7 @@ var _lucamug$elm_spa_seo_testing$Main$viewMetadata = function (model) {
 						A2(
 							_elm_lang$core$Basics_ops['++'],
 							'Title: ',
-							_lucamug$elm_spa_seo_testing$Main$titleForJs(model))),
+							_lucamug$elm_petit_train_puchi_densha$Main$pageTitle(model))),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -16295,7 +14351,7 @@ var _lucamug$elm_spa_seo_testing$Main$viewMetadata = function (model) {
 			}
 		});
 };
-var _lucamug$elm_spa_seo_testing$Main$parts = {
+var _lucamug$elm_petit_train_puchi_densha$Main$parts2 = {
 	ctor: '::',
 	_0: {
 		code: '4549131121261',
@@ -16318,64 +14374,417 @@ var _lucamug$elm_spa_seo_testing$Main$parts = {
 		_1: {ctor: '[]'}
 	}
 };
-var _lucamug$elm_spa_seo_testing$Main$trains = {
+var _lucamug$elm_petit_train_puchi_densha$Main$parts = {
 	ctor: '::',
-	_0: {id: 'SuperViewOdoriko', name: 'Super View Odoriko', nameJa: 'スーパービュー踊り子', wikipedia: 'https://en.wikipedia.org/wiki/Odoriko', wikipediaJa: 'https://ja.wikipedia.org/wiki/踊り子_(列車)', officialPage: 'http://www.jreast.co.jp/train/express/odoriko.html', officialPageJa: 'https://www.jreast.co.jp/e/routemaps/superviewodoriko.html'},
+	_0: {id1: 4, name: 'Riser Train Track', id2: 31, id3: 4549131120769, image1: 'F1mimnqLSqnGtNnkIjZzsUGXN8GySy2ktrsucVRKhzQ2cFFYQwj7qxTfknNae62DljmSNXsbXzyjm3M_66POa8QzEFOKeWvQJN-iyGlzXYvxVNj8n8hGYk8c5OWGzY8DfKNQ5ohBOQ', image2: '2vdMJ1YbU019mtNKmDlzi4d4wO89PQOo5hNldPGBosS0Sgc41QqtdOf9k2YmAbSfczaAoifP7VTceNP0K9Zzd4dMdBr013BDU8epePVc8F0swuwj8OCzO6gtk98O5VFVDl6IK9BTTA'},
 	_1: {
 		ctor: '::',
-		_0: {id: 'DrYellow', name: '', nameJa: '', wikipedia: '', wikipediaJa: '', officialPage: '', officialPageJa: ''},
-		_1: {ctor: '[]'}
+		_0: {id1: 16, name: 'Double Line Elevated Tier', id2: 108, id3: 4549131326444, image1: 'u0SO657257dskAP8U1xdMH6-iV6VJcxoWd6uVnlspswSenLL2DcjdYI4CsPvzBP88ilJd7L0HyYlXXcnIG9x5TXsBYDOpkdeJxLd14CkBBqgIjKWqcoo-PFuLYfc802JvUiX4qusJQ', image2: 'RVW4R-WXOmSPnG9l6VJXXSuJ8IX9pHvc7f2htOXipu57gynhgLhr6XcxmkNkt0H54BJH_TJWcvH_T7c3ZG9T67e6DvAmuY5OmGlRbSCC8gS_osOjE7Fq7xsVtuFGAuU6jHijTMnzrw'},
+		_1: {
+			ctor: '::',
+			_0: {id1: 0, name: 'Dr. Yellow', id2: 89, id3: 4549131121506, image1: 'YMZQqIAp0A0Pv8yl42m8tOxDyLYZ4FgjOzZ82gMaF_0YwBN_3uTk97w30tv-F6elWtPxSIKZwrazMihhxWevL62eqrlSAMEW_EvA_5jGJbize_0z3eSs4ncLAaiWzL0_mkMf6ztrwA', image2: 'phK31HG2c54l9bVNsvGE0BGsLfq8JLx9I3_HSFg0Jv0Qx2uUKwwK6kNj1rh4mhBNOfCCDbyP-ZkyisJT7ttSzpuf4Tfv60D1NjcrH5UxjqxFOSXpFvYTi5-Sb-NZZSAwpBsLT0lHqA'},
+			_1: {
+				ctor: '::',
+				_0: {id1: 9, name: 'Tunnel', id2: 53, id3: 4549131121148, image1: 'ohABrpclz5i7OXhfIYzhvkUFJXF6-yjuBji32RLxEEjxoMWVv9etxK1cIWIQUmM0kYOXHNouElbsdGqa-AZf-PXuf4v49sW9jM6OM9WX28noAQjXEZ5jhTq1zZHKaVMCqmLWE8O-xQ', image2: 'HUFlNemLdSkYK9hmUtrp2S2yMAQis_GFzq0iJVnh3xvzvLHJyAmrNP-bu-4_MsY_8wJZ2Ku5BoRX0UUq5sz5k7gFDe82UaLQ_Q1zsNSgg7BCc8hWg8ZYe0UzQBcwiCie5uGEetnFBA'},
+				_1: {
+					ctor: '::',
+					_0: {id1: 1, name: 'Elevated Tier', id2: 45, id3: 4549131121063, image1: 'us6elnjD43EijshGuCoshozWYZuwp3bfjEE22aESsRzDNAYpZiITqmfmYbquba4YkRimXHBvbnZKVi7tC2ygW1rf6N_bPNxXxOhoYT3JVsBuBxgRmDHeBUDW2Q6MaQq4ar2r7Bk-sw', image2: 'cVpaUTqbkKbyJGX-PXkuLTY0Djha74nMDx_FERhPI_Png8ftKZEwssS7Sr5TQPTND6hcs8C_Z-atfALLA1SWy5hpqaUywPLPKXv0h-E5lLWFRdweAQ-tRGdHMabGEH2PJfMcW0yY5w'},
+					_1: {
+						ctor: '::',
+						_0: {id1: 3, name: 'Curve Train Track', id2: 29, id3: 4549131120745, image1: 'yj2fCc7lylD6fiQIxI6oVqiC1L9QgLVPvO0YJmfApSFy9m59rBDcP7zRFEMhnCaYfjfOqCpwkjnYdnvwfJTHQR4jcnkOQ46ydFTHeLhtYNNkYfryQlJ5RF-6mMIQM4CgHC0wA1Ke2A', image2: 'lHrv5OgVzceJn9Ygd2FIAobmDo-0GXy6RAgMQygnE3wsyyr0FC6smhSFtJ3rML5sAs_aV49cR-R2cpIE3h7ghwcD-2n-aNDbdk3JVdCVk6pOwxdUb_sbCksFFujxJpsPmrvm3yBS7Q'},
+						_1: {
+							ctor: '::',
+							_0: {id1: 0, name: 'Super View Odoriko', id2: 64, id3: 4549131121254, image1: 'JYw728zCX_1rjBCKo9HHrnOCoCrhivFj8iXyz3--_vBzMVtYv41P7u3P39oTd0-MOhOtveNM-G_oA6a0gt2SOIcpakpgZLLb4iSMfLW89GUJcwMZP4CkXDnuDIa02ofkqIQ_oQVQng', image2: 'op_LGTsUcObTMIhTLdjyfNfrDW-_gY8JmaJ4gAZiRSFBFMWTboW8JCWltkzjjFO8vgVyv2EJA92HalRa8Dj4M7Dl3AjmjoSrZDaHMwSCPvxXKTvP6AbGGwHQXFJOmK_66xxGFGT2Ig'},
+							_1: {
+								ctor: '::',
+								_0: {id1: 0, name: 'Dr. Yellow', id2: 88, id3: 4549131121490, image1: 'rDD2G4dJGlR5wKCUsZGWhz8s2yem0-5J03SbUOdjYEKrktFb0KBtKwxcm0B8-FYOurh03tUjXM3XjZFHJWUqg44WuQmixuua0jq9y5Rv4H6ER1hVOu_b9Q-1XqAQzsUboDrK20e-OA', image2: 'qgIKbZMl0LhTuyIcyZlgbmj-0m334Ljp-KzindWO7r5TNqlJziDftlyPZDCvCclScVlThlygqfwlOPv9Ij6R1NMmEzNVYQdHuycbyJZ5o8kCH9IVma3Te7NTfehGZceM4QN0u8Rm9g'},
+								_1: {
+									ctor: '::',
+									_0: {id1: 0, name: 'Super View Odoriko', id2: 65, id3: 4549131121261, image1: 'K1I0Fv_T0CEu0wdnVTsKToMk9vDWmHs2zev-7-XSVAfGG34F7c7-K8fM9PjDJx95QTV9xbOVUZ2WIYxpfUD7oRb767G2U8vHBNJKdAlSCjy4Pasnbitdx_chdf1O7Qr1FsGYDP0xpA', image2: 'fWPJdKVFI8LOBvS7X1YAYbeMLCldwe9dY-QCFX7IurhA3XbG7zvdTJwQadmTJ_ia__tFTRy2O3L_gfyFwzf0pwXyFeM5aBjkZl_4yj4lU6P2qP8IngcvMyrFuaE2K2LWexsnjYPTuA'},
+									_1: {
+										ctor: '::',
+										_0: {id1: 0, name: 'Dr. Yellow', id2: 90, id3: 4549131121513, image1: '8YRehvAiRCxGG_n0ytRHO6yD5e9VMaZRiL6lhtWTTOHOqSMmClq7CNq86fMeguM1-x1SAWK5nceOVK2sjlqm13RfAfziOw3_YM0OTgV7AGSNjItdEdiTJ2-obO7cgxtQ7ztUeGGo_w', image2: 't7tYEHGPMno5dT4RUoBJ1etZLhvpcigU_ACYmIKiKD8er8JEn-dFCGnpQrNAp72xW4cHOWr8WENKGvVRzCBuM-CaC2VxfSPEy6rqGjAcOFtWDqgcLJjdXxyv4pSqWBjl3kXm1CjDLA'},
+										_1: {
+											ctor: '::',
+											_0: {id1: 1, name: 'Straight Train Track', id2: 28, id3: 4549131120738, image1: 'QnHvBytJ0jpI2W3gRSuZNxhLOZPky2REMhC1iewHj1dcR3ZKDc4R_blt_i9W2j_N1bCR8o0ArXm4dLxO2zhfyxn8TbrYZRsfWZd9qCDP276J4h8vqZqGtrQYTPPkSJ2VLEtKA210jQ', image2: 'E1G6ZbMOgM_8-hre_tAYy_2FC5Wn0DLmLh7dSJLWTSZheyE3_qxNqef6kLEhW0zeKt-ZYtV_WZmvt0apWiwdzG142ey4l6NGl2pjw_9lR6PYGwOUxByBmms4-X5v9ceyhDP0cDn7XQ'},
+											_1: {
+												ctor: '::',
+												_0: {id1: 4, name: 'Bridge Column', id2: 48, id3: 4549131121094, image1: '2SL7ZWxWsYz9ilrhoNvoym7CwqREIoj0kXjEHF73cY5oBytjqLEhNZK88KwvMPj9xkMuHVVZhHCPfsxvPJNmPnY7QLy0CgqtcRVaXT-Oyjat_MSdJcgspTfDY-sZgywCEZuz0sSD2Q', image2: 'ClLRMGL9RomF2tUD03llBUdfWskdHsntla7OvegH13FnfFySXfPn1JDAJgVWUAgrhvQ7yfWkyLi2BHEVzaEL9JEYwj4shLzYyr-pjxgsY15X2IUlTkUtIanTWyTXjGbDetNhzcZmIg'},
+												_1: {
+													ctor: '::',
+													_0: {id1: 15, name: 'Turnplate', id2: 109, id3: 4549131326451, image1: 'L8OgsuTQgljBOLgFxo2FFngPObFxaT7fO6GBcd52QyY368X-bEfEHoeZRb3SGhG0647Pxn0ukU6R3qDaiV9gL0FOKjKOKGkzdhNi9CpXKLpVX8nvculY696fy4d1LIMJNIyrPaRoZQ', image2: 'PSzOKiYVp1KrflYK4gXl1mOwIID1nLkhzaeOVIKnCHvr6Tsx3XuSk1lExeU5hoPRNLcvDpAuGo4FehVzcz0rhqGtEnMday42m5hlX7FCRD5wWidPfXRtfSU5R6INF0Z0rsSuw540-A'},
+													_1: {
+														ctor: '::',
+														_0: {id1: 8, name: 'Cross Half Size Train Track', id2: 35, id3: 4549131120806, image1: '_PTAPuiFZ8hSDDqgSuhvyfeQyb1usHiWot8VHWezPQ6VvZNNV1a4QNjtLne4zgV2I7LxMbPwdk1i9s7n1MX1FTyBA-2by4B9Ju2Kb5ak4aQ4hkUHWP_tfi9twNPXU1GskpG0eRumSg', image2: 'aadtlehbLBTGxg2uJFBvl8lvp1PNM9h3ZeTbbqyHVR2OXrZc7P4chNXjlwVsGPVta14_v6jRNInpBqkG9ZFF1dOObYGdWj-uLukVt3yHQIV7_R-SO068peEdZt5Mn_vVZe5iLC4xFg'},
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 };
-var _lucamug$elm_spa_seo_testing$Main$section3name = 'trains';
-var _lucamug$elm_spa_seo_testing$Main$section2name = 'videos';
-var _lucamug$elm_spa_seo_testing$Main$section1name = 'parts';
-var _lucamug$elm_spa_seo_testing$Main$routeToPath = function (route) {
-	var _p1 = route;
-	switch (_p1.ctor) {
+var _lucamug$elm_petit_train_puchi_densha$Main$section1 = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('viewPartContainer'),
+		_1: {ctor: '[]'}
+	},
+	A2(_elm_lang$core$List$map, _lucamug$elm_petit_train_puchi_densha$Main$viewPart, _lucamug$elm_petit_train_puchi_densha$Main$parts));
+var _lucamug$elm_petit_train_puchi_densha$Main$trains = {
+	ctor: '::',
+	_0: {
+		id: 'SuperViewOdoriko',
+		name: 'Super View Odoriko',
+		nameJa: 'スーパービュー踊り子',
+		wikipedia: 'https://en.wikipedia.org/wiki/Odoriko',
+		wikipediaJa: 'https://ja.wikipedia.org/wiki/踊り子_(列車)',
+		officialPage: 'http://www.jreast.co.jp/train/express/odoriko.html',
+		officialPageJa: 'https://www.jreast.co.jp/e/routemaps/superviewodoriko.html',
+		imageFront: _elm_lang$core$Maybe$Nothing,
+		imageSide: _elm_lang$core$Maybe$Nothing,
+		imageCorner: _elm_lang$core$Maybe$Nothing,
+		imagePackageFront: _elm_lang$core$Maybe$Nothing,
+		imagePackageBack: _elm_lang$core$Maybe$Nothing,
+		imageReal: _elm_lang$core$Maybe$Just('SuGBaYkoCEbN1UgVsye0Npn2iUK0RNBzUB34LpVo2fI6P7hZpTPl9KGNJVwBbRx2TEmqf2lcxAMA1oJD2A22lTyfy0fadUE1CZkSIxfDTxNwi3v3GQ9YJtd3NVO1I2eS8b_JQv87gQ'),
+		imageRealAttribution: _elm_lang$core$Maybe$Just('By TC411-507 - 投稿者自身による作品, CC 表示-継承 3.0, https://commons.wikimedia.org/w/index.php?curid=8752829')
+	},
+	_1: {
+		ctor: '::',
+		_0: {
+			id: 'DrYellow',
+			name: 'Shinkansen 923 Dr. Yellow',
+			nameJa: '新幹線923形 ドクターイエロー',
+			wikipedia: 'https://en.wikipedia.org/wiki/Doctor_Yellow',
+			wikipediaJa: 'https://ja.wikipedia.org/wiki/ドクターイエロー',
+			officialPage: '',
+			officialPageJa: '',
+			imageFront: _elm_lang$core$Maybe$Nothing,
+			imageSide: _elm_lang$core$Maybe$Nothing,
+			imageCorner: _elm_lang$core$Maybe$Nothing,
+			imagePackageFront: _elm_lang$core$Maybe$Nothing,
+			imagePackageBack: _elm_lang$core$Maybe$Nothing,
+			imageReal: _elm_lang$core$Maybe$Just('FQyIpanix-Ph3l1nAcIocd67CCrZBY01IhTZOk4FTtaO2OrJv3MmyZrTxkBUL-pDUNhuDyxVOO5tD0ByOP8lRqF3mtJ9vB0ZOxIU39k6bX7gQ-pEnHjhar7qlSrr30ieHL1IsT39fg'),
+			imageRealAttribution: _elm_lang$core$Maybe$Just('By オリジナルのアップロード者は日本語版ウィキペディアの流風さん - ja.wikipedia からコモンズに移動されました。, CC 表示-継承 3.0, https://commons.wikimedia.org/w/index.php?curid=10056573')
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				id: 'Yamanote',
+				name: 'E231-500 Yamanote line',
+				nameJa: 'E231系500番台 山手線',
+				wikipedia: 'https://en.wikipedia.org/wiki/Yamanote_Line',
+				wikipediaJa: 'https://ja.wikipedia.org/wiki/山手線',
+				officialPage: '',
+				officialPageJa: '',
+				imageFront: _elm_lang$core$Maybe$Just('09l0vremwjCeTVQZ4yKOGl5nKmmv6GKMUR0I1CGHPYCzH6oIcHHW8jfjWZEL_Qs2muGbqO3kcmhOgC2VsOlEEn-UgibkmOgs1vq5GpPiJKWLby_BAPa56sljws_J08govRPNmIvA1w'),
+				imageSide: _elm_lang$core$Maybe$Nothing,
+				imageCorner: _elm_lang$core$Maybe$Nothing,
+				imagePackageFront: _elm_lang$core$Maybe$Nothing,
+				imagePackageBack: _elm_lang$core$Maybe$Nothing,
+				imageReal: _elm_lang$core$Maybe$Just('44M5fCQ59Y39vv2OL7L7nU7R9ZSRaXokofgPkxQX04RezrC29G7JLTdyJBeL6UtUWVL0VE8hIHgI5BObb3IwGGJus4_X65Mh-1nSSY90OIn-Jl7ih6RyuJT5b9i6_q3cYG67_ltOjA'),
+				imageRealAttribution: _elm_lang$core$Maybe$Just('By Tennen-Gas - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=6251929')
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					id: 'Orange',
+					name: '201 \"Tokyo ⇔ Takao\"',
+					nameJa: '201系 中央特快 走行区間「東京⇔高尾」',
+					wikipedia: 'https://en.wikipedia.org/wiki/201_series',
+					wikipediaJa: 'https://ja.wikipedia.org/wiki/国鉄201系電車',
+					officialPage: '',
+					officialPageJa: '',
+					imageFront: _elm_lang$core$Maybe$Just('Uwl1dN0a-3ygod2JKIc293AvuySDGU9qPHikxTR6P9Y_lHZi4WC52w2QqzHXa5tc-lL7RyZnLj49C6aE0Yc2m6f0BIDqoaYl9UzZcIoGGr2G_Rgjoy0O_1yC-yDoo0pcXYIk6QRY3w'),
+					imageSide: _elm_lang$core$Maybe$Nothing,
+					imageCorner: _elm_lang$core$Maybe$Nothing,
+					imagePackageFront: _elm_lang$core$Maybe$Nothing,
+					imagePackageBack: _elm_lang$core$Maybe$Nothing,
+					imageReal: _elm_lang$core$Maybe$Just('m0N1kG2iI2uXgnkWamu1ZFV5k5WbQrNIY-vA6H7356gaiqB-18s1zR9v5fHga1Bpl9ntXeRPXYcmc3eynrlEq870JIqKVacwQkS0RiVymDQ2MaZjs4s7Nivxn1bvOtmD81HQab609w'),
+					imageRealAttribution: _elm_lang$core$Maybe$Just('CC 表示 3.0, https://ja.wikipedia.org/w/index.php?curid=159921')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						id: 'Green',
+						name: 'Kiha 71 Yufuin no Mori',
+						nameJa: 'キハ71系 ゆふいんの森',
+						wikipedia: 'https://en.wikipedia.org/wiki/Yufuin_no_Mori',
+						wikipediaJa: 'https://ja.wikipedia.org/wiki/ゆふ_(列車)',
+						officialPage: '',
+						officialPageJa: '',
+						imageFront: _elm_lang$core$Maybe$Just('Fg2anKuExe6urrzyTPNIKOIR_-R0tg30yoZtldMk8qClA4htVvCGK0nqG0_28HcViza5S-wOP5JDZTi0nwalo_-b-w4DlE_i11cp3PSa7nGLZdnUDYEN3xz9w3zSBGz0g0gz7uvTmA'),
+						imageSide: _elm_lang$core$Maybe$Nothing,
+						imageCorner: _elm_lang$core$Maybe$Nothing,
+						imagePackageFront: _elm_lang$core$Maybe$Nothing,
+						imagePackageBack: _elm_lang$core$Maybe$Nothing,
+						imageReal: _elm_lang$core$Maybe$Just('RT8wkNCmctTr9lVOxGYOYp2Jc9-piA0ljIPCwBrOt9mEMH3oDlur2kBMhp5XEr0a1oxTWfvKMHzUp4ZLHmfMJtEEsBw_rdAvkGVYFT9dsOyfFtD1YhWIdcXyd6OQNdvUJ8fFkLusfg'),
+						imageRealAttribution: _elm_lang$core$Maybe$Just('By Takasunrise0921 - ja:File:Yuhuinnomori.jpg, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=1208285')
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							id: 'Shinkansen',
+							name: 'E5 Shinkansen Hayabusa · Hayate · Yamabiko',
+							nameJa: 'E5系新幹線 はやぶさ・はやて・やまびこ',
+							wikipedia: '',
+							wikipediaJa: 'https://ja.wikipedia.org/wiki/はやぶさ_(新幹線)',
+							officialPage: '',
+							officialPageJa: '',
+							imageFront: _elm_lang$core$Maybe$Just('yj3JqPG6nisIR1Fbe8KYWRR0P69uc-_p7cziPZLz6n5lcSA6Grx4y0cmXQgYKyC3Dtir9BNw2htfhBxybQFi5bbrWbPJV4Zr8vXyfWa0Pa5KusGYurP2sRn4yqXw2KYFknm1hLgf_w'),
+							imageSide: _elm_lang$core$Maybe$Nothing,
+							imageCorner: _elm_lang$core$Maybe$Nothing,
+							imagePackageFront: _elm_lang$core$Maybe$Nothing,
+							imagePackageBack: _elm_lang$core$Maybe$Nothing,
+							imageReal: _elm_lang$core$Maybe$Just('1fP4pZ6IQi8qW3ED42-lSg3NHCyqR6TyDFDrBZEbbNAEyGLkoWq3d7hcjqeKoqM9dh1UKQlhmPXjglw6ZCTKkCLMVbaW9mt1t0HkDhSLVgKWp4Cg1eAfbNaMEil92ZDw1h2XcmAu1Q'),
+							imageRealAttribution: _elm_lang$core$Maybe$Just('By Nanashinodensyaku - 投稿者自身による作品, CC 表示-継承 4.0, https://commons.wikimedia.org/w/index.php?curid=37732270')
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								id: 'Nex',
+								name: 'E259 Narita Express',
+								nameJa: 'E259系 成田エクスプレス',
+								wikipedia: 'https://en.wikipedia.org/wiki/E259_series',
+								wikipediaJa: 'https://ja.wikipedia.org/wiki/JR東日本E259系電車',
+								officialPage: '',
+								officialPageJa: '',
+								imageFront: _elm_lang$core$Maybe$Just('7FaJBeVDcuvLRsNToWjSeQNZcbYm3xrfw4FuhpH4ZtDwRe3BrluVvxxujFmVRJzU1KFmutp7US3IoPiJlFQAWtSjcjkptwsWzqbiFDlEcT3Yq1w9WVd1IRQcMocM6VItlqGqJWAC_w'),
+								imageSide: _elm_lang$core$Maybe$Nothing,
+								imageCorner: _elm_lang$core$Maybe$Nothing,
+								imagePackageFront: _elm_lang$core$Maybe$Nothing,
+								imagePackageBack: _elm_lang$core$Maybe$Nothing,
+								imageReal: _elm_lang$core$Maybe$Just('OwctbEA1tNJtCyTFtWRqSP4TjLdbndZhYJgbqd5RDXF7v9y-GEY2v0P6s693NK5xGOulaZ6eM5Hb2lF07HV-x0Y7xJ2qYnHwqhu7hD0HkufIRo3q-Fj3XBKp8snj0KlE0gstrdwxoQ'),
+								imageRealAttribution: _elm_lang$core$Maybe$Just('By 名無し野電車区 (Nanashino Denshaku) - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=22155966')
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									id: 'SL',
+									name: 'JNR C11 Steam Locomotive',
+									nameJa: 'C11蒸気機関車',
+									wikipedia: 'https://en.wikipedia.org/wiki/JNR_Class_C11',
+									wikipediaJa: 'https://ja.wikipedia.org/wiki/国鉄C11形蒸気機関車',
+									officialPage: '',
+									officialPageJa: '',
+									imageReal: _elm_lang$core$Maybe$Just('PfuK_DE7gZKmg-xSirznK-O8zr9kOlBV4ULY-QxHbAkw-tHbUnKUtGSn0BUIdrc3jnqgh9WbtTveT8zCspPHQU6CHX-5hCHk2xgnIKhKPJz9O7WKsDh1yyO_pAuwxRyeLLJYazFUUw'),
+									imageRealAttribution: _elm_lang$core$Maybe$Just('By Kone - 投稿者自身による作品, CC 表示-継承 3.0, https://commons.wikimedia.org/w/index.php?curid=787781'),
+									imageFront: _elm_lang$core$Maybe$Nothing,
+									imageSide: _elm_lang$core$Maybe$Nothing,
+									imageCorner: _elm_lang$core$Maybe$Nothing,
+									imagePackageFront: _elm_lang$core$Maybe$Nothing,
+									imagePackageBack: _elm_lang$core$Maybe$Nothing
+								},
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _lucamug$elm_petit_train_puchi_densha$Main$viewTop = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Petit Train is a cheap railway toy made by LEC, Inc. (http://lecinc.info/) and sold at 100 yen shops of Daiso (ザ・ダイソー). The Japanese name is プチ電車 (\"puchi densha\"). It is based on three-car trains running on plastic rails. The middle car has the engine that run on a single AA battery.'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Comments and Info at lucamug@gmail.com'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('viewTrainContainer'),
+					_1: {ctor: '[]'}
+				},
+				A2(_elm_lang$core$List$map, _lucamug$elm_petit_train_puchi_densha$Main$viewTrain, _lucamug$elm_petit_train_puchi_densha$Main$trains)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$a,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$href('https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%81%E9%9B%BB%E8%BB%8A%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Wikipedia page in Japanese'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href('https://photos.app.goo.gl/10C4khv6csfkfQMn2'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Photo Album'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$href('http://puchi.guupa.com'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('puchi.guupa.com'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href('https://www.youtube.com/watch?v=AVJfzkGycLo'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Official video'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _lucamug$elm_petit_train_puchi_densha$Main$sections = {
+	section1: {name: 'Parts'},
+	section2: {name: 'Videos'},
+	section3: {name: 'Trains'}
+};
+var _lucamug$elm_petit_train_puchi_densha$Main$routeToPath = function (route) {
+	var _p3 = route;
+	switch (_p3.ctor) {
 		case 'Top':
 			return '';
 		case 'Section1':
-			return _lucamug$elm_spa_seo_testing$Main$section1name;
+			return _lucamug$elm_petit_train_puchi_densha$Main$sections.section1.name;
 		case 'Section2':
-			return _lucamug$elm_spa_seo_testing$Main$section2name;
+			return _lucamug$elm_petit_train_puchi_densha$Main$sections.section2.name;
 		case 'Section3':
-			return _lucamug$elm_spa_seo_testing$Main$section3name;
+			return _lucamug$elm_petit_train_puchi_densha$Main$sections.section3.name;
 		case 'Sitemap':
 			return 'sitemap';
 		default:
 			return 'notFound';
 	}
 };
-var _lucamug$elm_spa_seo_testing$Main$routeToSurgeUrl = function (route) {
+var _lucamug$elm_petit_train_puchi_densha$Main$routeToSurgeUrl = function (route) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
-		'http://elm-spa-seo-testing.guupa.com/',
-		_lucamug$elm_spa_seo_testing$Main$routeToPath(route));
+		'http://puchi.guupa.com/',
+		_lucamug$elm_petit_train_puchi_densha$Main$routeToPath(route));
 };
-var _lucamug$elm_spa_seo_testing$Main$capitalize = function (str) {
-	var _p2 = _elm_lang$core$String$uncons(str);
-	if (_p2.ctor === 'Nothing') {
+var _lucamug$elm_petit_train_puchi_densha$Main$capitalize = function (str) {
+	var _p4 = _elm_lang$core$String$uncons(str);
+	if (_p4.ctor === 'Nothing') {
 		return str;
 	} else {
-		var newFirstLetter = _elm_lang$core$Char$toUpper(_p2._0._0);
-		return A2(_elm_lang$core$String$cons, newFirstLetter, _p2._0._1);
+		var newFirstLetter = _elm_lang$core$Char$toUpper(_p4._0._0);
+		return A2(_elm_lang$core$String$cons, newFirstLetter, _p4._0._1);
 	}
 };
-var _lucamug$elm_spa_seo_testing$Main$pathToName = function (path) {
-	return _elm_lang$core$Native_Utils.eq(path, '') ? 'Home' : _lucamug$elm_spa_seo_testing$Main$capitalize(path);
+var _lucamug$elm_petit_train_puchi_densha$Main$pathToName = function (path) {
+	return _elm_lang$core$Native_Utils.eq(path, '') ? 'Home' : _lucamug$elm_petit_train_puchi_densha$Main$capitalize(path);
 };
-var _lucamug$elm_spa_seo_testing$Main$urlChange = _elm_lang$core$Native_Platform.outgoingPort(
+var _lucamug$elm_petit_train_puchi_densha$Main$urlChange = _elm_lang$core$Native_Platform.outgoingPort(
 	'urlChange',
 	function (v) {
 		return v;
 	});
-var _lucamug$elm_spa_seo_testing$Main$updateTitleAndMetaDescription = function (model) {
-	return _lucamug$elm_spa_seo_testing$Main$urlChange(
-		_lucamug$elm_spa_seo_testing$Main$titleForJs(model));
+var _lucamug$elm_petit_train_puchi_densha$Main$updateTitleAndMetaDescription = function (model) {
+	return _lucamug$elm_petit_train_puchi_densha$Main$urlChange(
+		_lucamug$elm_petit_train_puchi_densha$Main$pageTitle(model));
 };
-var _lucamug$elm_spa_seo_testing$Main$titleChanged = _elm_lang$core$Native_Platform.incomingPort('titleChanged', _elm_lang$core$Json_Decode$string);
-var _lucamug$elm_spa_seo_testing$Main$Model = function (a) {
+var _lucamug$elm_petit_train_puchi_densha$Main$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {route: a, history: b, titleHistory: c, location: d, version: e, title: f};
+	});
+var _lucamug$elm_petit_train_puchi_densha$Main$Train = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {
@@ -16385,7 +14794,15 @@ var _lucamug$elm_spa_seo_testing$Main$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {route: a, history: b, titleHistory: c, api1Data: d, api2Data: e, location: f, version: g, initialTime: h, presentTime: i, title: j};
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {id: a, imageCorner: b, imageFront: c, imagePackageBack: d, imagePackageFront: e, imageSide: f, name: g, nameJa: h, officialPage: i, officialPageJa: j, wikipedia: k, wikipediaJa: l, imageReal: m, imageRealAttribution: n};
+													};
+												};
+											};
+										};
 									};
 								};
 							};
@@ -16396,30 +14813,21 @@ var _lucamug$elm_spa_seo_testing$Main$Model = function (a) {
 		};
 	};
 };
-var _lucamug$elm_spa_seo_testing$Main$Api1Data = function (a) {
-	return {url: a};
-};
-var _lucamug$elm_spa_seo_testing$Main$Api2Data = function (a) {
-	return {url: a};
-};
-var _lucamug$elm_spa_seo_testing$Main$OnTitleChanged = function (a) {
-	return {ctor: 'OnTitleChanged', _0: a};
-};
-var _lucamug$elm_spa_seo_testing$Main$UrlChange = function (a) {
+var _lucamug$elm_petit_train_puchi_densha$Main$UrlChange = function (a) {
 	return {ctor: 'UrlChange', _0: a};
 };
-var _lucamug$elm_spa_seo_testing$Main$ChangeLocation = function (a) {
+var _lucamug$elm_petit_train_puchi_densha$Main$ChangeLocation = function (a) {
 	return {ctor: 'ChangeLocation', _0: a};
 };
-var _lucamug$elm_spa_seo_testing$Main$onLinkClick = function (path) {
+var _lucamug$elm_petit_train_puchi_densha$Main$onLinkClick = function (path) {
 	return A3(
 		_elm_lang$html$Html_Events$onWithOptions,
 		'click',
 		{stopPropagation: false, preventDefault: true},
 		_elm_lang$core$Json_Decode$succeed(
-			_lucamug$elm_spa_seo_testing$Main$ChangeLocation(path)));
+			_lucamug$elm_petit_train_puchi_densha$Main$ChangeLocation(path)));
 };
-var _lucamug$elm_spa_seo_testing$Main$viewLink = F3(
+var _lucamug$elm_petit_train_puchi_densha$Main$viewLink = F3(
 	function (model, path, route) {
 		var url = A2(_elm_lang$core$Basics_ops['++'], '/', path);
 		return A2(
@@ -16437,7 +14845,7 @@ var _lucamug$elm_spa_seo_testing$Main$viewLink = F3(
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html$text(
-							_lucamug$elm_spa_seo_testing$Main$pathToName(path)),
+							_lucamug$elm_petit_train_puchi_densha$Main$pathToName(path)),
 						_1: {ctor: '[]'}
 					}) : A2(
 					_elm_lang$html$Html$a,
@@ -16446,52 +14854,52 @@ var _lucamug$elm_spa_seo_testing$Main$viewLink = F3(
 						_0: _elm_lang$html$Html_Attributes$href(url),
 						_1: {
 							ctor: '::',
-							_0: _lucamug$elm_spa_seo_testing$Main$onLinkClick(url),
+							_0: _lucamug$elm_petit_train_puchi_densha$Main$onLinkClick(url),
 							_1: {ctor: '[]'}
 						}
 					},
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html$text(
-							_lucamug$elm_spa_seo_testing$Main$pathToName(path)),
+							_lucamug$elm_petit_train_puchi_densha$Main$pathToName(path)),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			});
 	});
-var _lucamug$elm_spa_seo_testing$Main$NotFound = {ctor: 'NotFound'};
-var _lucamug$elm_spa_seo_testing$Main$Sitemap = {ctor: 'Sitemap'};
-var _lucamug$elm_spa_seo_testing$Main$Section3 = {ctor: 'Section3'};
-var _lucamug$elm_spa_seo_testing$Main$Section2 = {ctor: 'Section2'};
-var _lucamug$elm_spa_seo_testing$Main$Section1 = {ctor: 'Section1'};
-var _lucamug$elm_spa_seo_testing$Main$Top = {ctor: 'Top'};
-var _lucamug$elm_spa_seo_testing$Main$matchers = _evancz$url_parser$UrlParser$oneOf(
+var _lucamug$elm_petit_train_puchi_densha$Main$NotFound = {ctor: 'NotFound'};
+var _lucamug$elm_petit_train_puchi_densha$Main$Sitemap = {ctor: 'Sitemap'};
+var _lucamug$elm_petit_train_puchi_densha$Main$Section3 = {ctor: 'Section3'};
+var _lucamug$elm_petit_train_puchi_densha$Main$Section2 = {ctor: 'Section2'};
+var _lucamug$elm_petit_train_puchi_densha$Main$Section1 = {ctor: 'Section1'};
+var _lucamug$elm_petit_train_puchi_densha$Main$Top = {ctor: 'Top'};
+var _lucamug$elm_petit_train_puchi_densha$Main$matchers = _evancz$url_parser$UrlParser$oneOf(
 	{
 		ctor: '::',
-		_0: A2(_evancz$url_parser$UrlParser$map, _lucamug$elm_spa_seo_testing$Main$Top, _evancz$url_parser$UrlParser$top),
+		_0: A2(_evancz$url_parser$UrlParser$map, _lucamug$elm_petit_train_puchi_densha$Main$Top, _evancz$url_parser$UrlParser$top),
 		_1: {
 			ctor: '::',
 			_0: A2(
 				_evancz$url_parser$UrlParser$map,
-				_lucamug$elm_spa_seo_testing$Main$Section1,
-				_evancz$url_parser$UrlParser$s(_lucamug$elm_spa_seo_testing$Main$section1name)),
+				_lucamug$elm_petit_train_puchi_densha$Main$Section1,
+				_evancz$url_parser$UrlParser$s(_lucamug$elm_petit_train_puchi_densha$Main$sections.section1.name)),
 			_1: {
 				ctor: '::',
 				_0: A2(
 					_evancz$url_parser$UrlParser$map,
-					_lucamug$elm_spa_seo_testing$Main$Section2,
-					_evancz$url_parser$UrlParser$s(_lucamug$elm_spa_seo_testing$Main$section2name)),
+					_lucamug$elm_petit_train_puchi_densha$Main$Section2,
+					_evancz$url_parser$UrlParser$s(_lucamug$elm_petit_train_puchi_densha$Main$sections.section2.name)),
 				_1: {
 					ctor: '::',
 					_0: A2(
 						_evancz$url_parser$UrlParser$map,
-						_lucamug$elm_spa_seo_testing$Main$Section3,
-						_evancz$url_parser$UrlParser$s(_lucamug$elm_spa_seo_testing$Main$section3name)),
+						_lucamug$elm_petit_train_puchi_densha$Main$Section3,
+						_evancz$url_parser$UrlParser$s(_lucamug$elm_petit_train_puchi_densha$Main$sections.section3.name)),
 					_1: {
 						ctor: '::',
 						_0: A2(
 							_evancz$url_parser$UrlParser$map,
-							_lucamug$elm_spa_seo_testing$Main$Sitemap,
+							_lucamug$elm_petit_train_puchi_densha$Main$Sitemap,
 							_evancz$url_parser$UrlParser$s('sitemap')),
 						_1: {ctor: '[]'}
 					}
@@ -16499,74 +14907,60 @@ var _lucamug$elm_spa_seo_testing$Main$matchers = _evancz$url_parser$UrlParser$on
 			}
 		}
 	});
-var _lucamug$elm_spa_seo_testing$Main$locationToRoute = function (location) {
-	var _p3 = A2(_evancz$url_parser$UrlParser$parsePath, _lucamug$elm_spa_seo_testing$Main$matchers, location);
-	if (_p3.ctor === 'Just') {
-		return _p3._0;
+var _lucamug$elm_petit_train_puchi_densha$Main$locationToRoute = function (location) {
+	var _p5 = A2(_evancz$url_parser$UrlParser$parsePath, _lucamug$elm_petit_train_puchi_densha$Main$matchers, location);
+	if (_p5.ctor === 'Just') {
+		return _p5._0;
 	} else {
-		return _lucamug$elm_spa_seo_testing$Main$NotFound;
+		return _lucamug$elm_petit_train_puchi_densha$Main$NotFound;
 	}
 };
-var _lucamug$elm_spa_seo_testing$Main$update = F2(
+var _lucamug$elm_petit_train_puchi_densha$Main$update = F2(
 	function (msg, model) {
-		var _p4 = msg;
-		switch (_p4.ctor) {
-			case 'ChangeLocation':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _elm_lang$navigation$Navigation$newUrl(_p4._0)
-				};
-			case 'UrlChange':
-				var _p5 = _p4._0;
-				var newHistory = {ctor: '::', _0: _p5.pathname, _1: model.history};
-				var newRoute = _lucamug$elm_spa_seo_testing$Main$locationToRoute(_p5);
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{route: newRoute, history: newHistory, location: _p5});
-				return {
-					ctor: '_Tuple2',
-					_0: newModel,
-					_1: _lucamug$elm_spa_seo_testing$Main$updateTitleAndMetaDescription(newModel)
-				};
-			default:
-				var newTitleHistory = {ctor: '::', _0: _p4._0, _1: model.titleHistory};
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{titleHistory: newTitleHistory}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+		var _p6 = msg;
+		if (_p6.ctor === 'ChangeLocation') {
+			return {
+				ctor: '_Tuple2',
+				_0: model,
+				_1: _elm_lang$navigation$Navigation$newUrl(_p6._0)
+			};
+		} else {
+			var _p7 = _p6._0;
+			var newHistory = {ctor: '::', _0: _p7.pathname, _1: model.history};
+			var newRoute = _lucamug$elm_petit_train_puchi_densha$Main$locationToRoute(_p7);
+			var newModel = _elm_lang$core$Native_Utils.update(
+				model,
+				{route: newRoute, history: newHistory, location: _p7});
+			return {
+				ctor: '_Tuple2',
+				_0: newModel,
+				_1: _lucamug$elm_petit_train_puchi_densha$Main$updateTitleAndMetaDescription(newModel)
+			};
 		}
 	});
-var _lucamug$elm_spa_seo_testing$Main$initModel = function (location) {
+var _lucamug$elm_petit_train_puchi_densha$Main$initModel = function (location) {
 	return {
-		route: _lucamug$elm_spa_seo_testing$Main$locationToRoute(location),
+		route: _lucamug$elm_petit_train_puchi_densha$Main$locationToRoute(location),
 		history: {
 			ctor: '::',
 			_0: location.pathname,
 			_1: {ctor: '[]'}
 		},
 		titleHistory: {ctor: '[]'},
-		api1Data: '',
-		api2Data: '',
 		location: location,
 		version: '9',
-		initialTime: 0,
-		presentTime: 0,
 		title: 'The Daiso Petit Train Series - ザ・ダイソーのプチ電車シリーズ'
 	};
 };
-var _lucamug$elm_spa_seo_testing$Main$init = function (location) {
-	var model = _lucamug$elm_spa_seo_testing$Main$initModel(location);
+var _lucamug$elm_petit_train_puchi_densha$Main$init = function (location) {
+	var model = _lucamug$elm_petit_train_puchi_densha$Main$initModel(location);
 	return {
 		ctor: '_Tuple2',
 		_0: model,
-		_1: A2(_lucamug$elm_spa_seo_testing$Main$initCmd, model, location)
+		_1: A2(_lucamug$elm_petit_train_puchi_densha$Main$initCmd, model, location)
 	};
 };
-var _lucamug$elm_spa_seo_testing$Main$viewNavigation = function (model) {
+var _lucamug$elm_petit_train_puchi_densha$Main$viewNavigation = function (model) {
 	return A2(
 		_elm_lang$html$Html$ul,
 		{
@@ -16576,19 +14970,19 @@ var _lucamug$elm_spa_seo_testing$Main$viewNavigation = function (model) {
 		},
 		{
 			ctor: '::',
-			_0: A3(_lucamug$elm_spa_seo_testing$Main$viewLink, model, '', _lucamug$elm_spa_seo_testing$Main$Top),
+			_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$viewLink, model, '', _lucamug$elm_petit_train_puchi_densha$Main$Top),
 			_1: {
 				ctor: '::',
-				_0: A3(_lucamug$elm_spa_seo_testing$Main$viewLink, model, _lucamug$elm_spa_seo_testing$Main$section1name, _lucamug$elm_spa_seo_testing$Main$Section1),
+				_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$viewLink, model, _lucamug$elm_petit_train_puchi_densha$Main$sections.section1.name, _lucamug$elm_petit_train_puchi_densha$Main$Section1),
 				_1: {
 					ctor: '::',
-					_0: A3(_lucamug$elm_spa_seo_testing$Main$viewLink, model, _lucamug$elm_spa_seo_testing$Main$section2name, _lucamug$elm_spa_seo_testing$Main$Section2),
+					_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$viewLink, model, _lucamug$elm_petit_train_puchi_densha$Main$sections.section2.name, _lucamug$elm_petit_train_puchi_densha$Main$Section2),
 					_1: {
 						ctor: '::',
-						_0: A3(_lucamug$elm_spa_seo_testing$Main$viewLink, model, _lucamug$elm_spa_seo_testing$Main$section3name, _lucamug$elm_spa_seo_testing$Main$Section3),
+						_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$viewLink, model, _lucamug$elm_petit_train_puchi_densha$Main$sections.section3.name, _lucamug$elm_petit_train_puchi_densha$Main$Section3),
 						_1: {
 							ctor: '::',
-							_0: A3(_lucamug$elm_spa_seo_testing$Main$viewLink, model, 'sitemap', _lucamug$elm_spa_seo_testing$Main$Sitemap),
+							_0: A3(_lucamug$elm_petit_train_puchi_densha$Main$viewLink, model, 'sitemap', _lucamug$elm_petit_train_puchi_densha$Main$Sitemap),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -16596,7 +14990,7 @@ var _lucamug$elm_spa_seo_testing$Main$viewNavigation = function (model) {
 			}
 		});
 };
-var _lucamug$elm_spa_seo_testing$Main$viewPage = function (model) {
+var _lucamug$elm_petit_train_puchi_densha$Main$viewPage = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -16608,8 +15002,8 @@ var _lucamug$elm_spa_seo_testing$Main$viewPage = function (model) {
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html$text(
-						_lucamug$elm_spa_seo_testing$Main$pathToName(
-							_lucamug$elm_spa_seo_testing$Main$routeToPath(model.route))),
+						_lucamug$elm_petit_train_puchi_densha$Main$pathToName(
+							_lucamug$elm_petit_train_puchi_densha$Main$routeToPath(model.route))),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -16620,16 +15014,16 @@ var _lucamug$elm_spa_seo_testing$Main$viewPage = function (model) {
 					{
 						ctor: '::',
 						_0: function () {
-							var _p6 = model.route;
-							switch (_p6.ctor) {
+							var _p8 = model.route;
+							switch (_p8.ctor) {
 								case 'Section1':
-									return _elm_lang$html$Html$text(_lucamug$elm_spa_seo_testing$Main$section1);
+									return _lucamug$elm_petit_train_puchi_densha$Main$section1;
 								case 'Section2':
-									return _elm_lang$html$Html$text(_lucamug$elm_spa_seo_testing$Main$section2);
+									return _lucamug$elm_petit_train_puchi_densha$Main$section2;
 								case 'Section3':
-									return _elm_lang$html$Html$text(_lucamug$elm_spa_seo_testing$Main$section3);
+									return _lucamug$elm_petit_train_puchi_densha$Main$section3;
 								case 'Top':
-									return _lucamug$elm_spa_seo_testing$Main$viewTop;
+									return _lucamug$elm_petit_train_puchi_densha$Main$viewTop;
 								case 'Sitemap':
 									return A2(
 										_elm_lang$html$Html$textarea,
@@ -16639,29 +15033,29 @@ var _lucamug$elm_spa_seo_testing$Main$viewPage = function (model) {
 											_0: _elm_lang$html$Html$text(
 												A2(
 													_elm_lang$core$Basics_ops['++'],
-													_lucamug$elm_spa_seo_testing$Main$routeToSurgeUrl(_lucamug$elm_spa_seo_testing$Main$Top),
+													_lucamug$elm_petit_train_puchi_densha$Main$routeToSurgeUrl(_lucamug$elm_petit_train_puchi_densha$Main$Top),
 													A2(
 														_elm_lang$core$Basics_ops['++'],
 														'\n',
 														A2(
 															_elm_lang$core$Basics_ops['++'],
-															_lucamug$elm_spa_seo_testing$Main$routeToSurgeUrl(_lucamug$elm_spa_seo_testing$Main$Section1),
+															_lucamug$elm_petit_train_puchi_densha$Main$routeToSurgeUrl(_lucamug$elm_petit_train_puchi_densha$Main$Section1),
 															A2(
 																_elm_lang$core$Basics_ops['++'],
 																'\n',
 																A2(
 																	_elm_lang$core$Basics_ops['++'],
-																	_lucamug$elm_spa_seo_testing$Main$routeToSurgeUrl(_lucamug$elm_spa_seo_testing$Main$Section2),
+																	_lucamug$elm_petit_train_puchi_densha$Main$routeToSurgeUrl(_lucamug$elm_petit_train_puchi_densha$Main$Section2),
 																	A2(
 																		_elm_lang$core$Basics_ops['++'],
 																		'\n',
 																		A2(
 																			_elm_lang$core$Basics_ops['++'],
-																			_lucamug$elm_spa_seo_testing$Main$routeToSurgeUrl(_lucamug$elm_spa_seo_testing$Main$Section3),
+																			_lucamug$elm_petit_train_puchi_densha$Main$routeToSurgeUrl(_lucamug$elm_petit_train_puchi_densha$Main$Section3),
 																			A2(
 																				_elm_lang$core$Basics_ops['++'],
 																				'\n',
-																				_lucamug$elm_spa_seo_testing$Main$routeToSurgeUrl(_lucamug$elm_spa_seo_testing$Main$Sitemap)))))))))),
+																				_lucamug$elm_petit_train_puchi_densha$Main$routeToSurgeUrl(_lucamug$elm_petit_train_puchi_densha$Main$Sitemap)))))))))),
 											_1: {ctor: '[]'}
 										});
 								default:
@@ -16674,7 +15068,7 @@ var _lucamug$elm_spa_seo_testing$Main$viewPage = function (model) {
 			}
 		});
 };
-var _lucamug$elm_spa_seo_testing$Main$view = function (model) {
+var _lucamug$elm_petit_train_puchi_densha$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -16690,7 +15084,7 @@ var _lucamug$elm_spa_seo_testing$Main$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(_lucamug$elm_spa_seo_testing$Main$css),
+					_0: _elm_lang$html$Html$text(_lucamug$elm_petit_train_puchi_densha$Main$css),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -16705,29 +15099,25 @@ var _lucamug$elm_spa_seo_testing$Main$view = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _lucamug$elm_spa_seo_testing$Main$viewNavigation(model),
+					_0: _lucamug$elm_petit_train_puchi_densha$Main$viewNavigation(model),
 					_1: {
 						ctor: '::',
-						_0: _lucamug$elm_spa_seo_testing$Main$viewMetadata(model),
-						_1: {
-							ctor: '::',
-							_0: _lucamug$elm_spa_seo_testing$Main$viewPage(model),
-							_1: {ctor: '[]'}
-						}
+						_0: _lucamug$elm_petit_train_puchi_densha$Main$viewPage(model),
+						_1: {ctor: '[]'}
 					}
 				}
 			}
 		});
 };
-var _lucamug$elm_spa_seo_testing$Main$main = A2(
+var _lucamug$elm_petit_train_puchi_densha$Main$main = A2(
 	_elm_lang$navigation$Navigation$program,
-	_lucamug$elm_spa_seo_testing$Main$UrlChange,
-	{init: _lucamug$elm_spa_seo_testing$Main$init, view: _lucamug$elm_spa_seo_testing$Main$view, update: _lucamug$elm_spa_seo_testing$Main$update, subscriptions: _lucamug$elm_spa_seo_testing$Main$subscriptions})();
+	_lucamug$elm_petit_train_puchi_densha$Main$UrlChange,
+	{init: _lucamug$elm_petit_train_puchi_densha$Main$init, view: _lucamug$elm_petit_train_puchi_densha$Main$view, update: _lucamug$elm_petit_train_puchi_densha$Main$update, subscriptions: _lucamug$elm_petit_train_puchi_densha$Main$subscriptions})();
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
-if (typeof _lucamug$elm_spa_seo_testing$Main$main !== 'undefined') {
-    _lucamug$elm_spa_seo_testing$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"OnTitleChanged":["String"],"UrlChange":["Navigation.Location"],"ChangeLocation":["String"]}}},"aliases":{"Navigation.Location":{"args":[],"type":"{ href : String , host : String , hostname : String , protocol : String , origin : String , port_ : String , pathname : String , search : String , hash : String , username : String , password : String }"}},"message":"Main.Msg"},"versions":{"elm":"0.18.0"}});
+if (typeof _lucamug$elm_petit_train_puchi_densha$Main$main !== 'undefined') {
+    _lucamug$elm_petit_train_puchi_densha$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"UrlChange":["Navigation.Location"],"ChangeLocation":["String"]}}},"aliases":{"Navigation.Location":{"args":[],"type":"{ href : String , host : String , hostname : String , protocol : String , origin : String , port_ : String , pathname : String , search : String , hash : String , username : String , password : String }"}},"message":"Main.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])
