@@ -1,5 +1,7 @@
 # プチ電車シリーズ - The Daiso Petit Train - ザ・ダイソー
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/87358614-82ad-4828-8182-14279c775df3/deploy-status)](https://app.netlify.com/sites/puchi/deploys)
+
 Petit Train is a cheap railway toy made by LEC, Inc. (http://lecinc.info/) and sold at 100 yen shops of Daiso (ザ・ダイソー). The Japanese name is プチ電車 ("puchi densha"). It is based on three-car trains running on plastic rails. The middle car has the engine that run on asingle AA battery. This is the official video: https://www.youtube.com/watch?v=AVJfzkGycLo.
 
 ## [Site](http://puchi.guupa.com/)
